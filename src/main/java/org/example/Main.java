@@ -5,3 +5,7 @@ public class Main {
         System.out.println("Hello world!");
     }
 }
+
+
+//  ./gradlew run
+// ./gradlew test --tests "org.example*"
