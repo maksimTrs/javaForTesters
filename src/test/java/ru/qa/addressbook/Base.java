@@ -5,7 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
-import static utils.SecretGetter.returnPass;
+import static utils.SecretGetter.handlingPassword;
+
 
 public abstract class Base {
 
@@ -34,7 +35,7 @@ public abstract class Base {
     private void doSignIn() {
         LogInPage logInPage = new LogInPage(driver);
         logInPage.goTo(URL);
-        logInPage.addLogInCreds(USER_NAME, returnPass(PASS_BASE64));
+        logInPage.addLogInCreds(USER_NAME, handlingPassword(PASS_BASE64));
         logInPage.submitRegistrationPage();
     }
 
