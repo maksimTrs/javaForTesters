@@ -1,6 +1,6 @@
 package ru.qa.addressbook;
 
-import org.openqa.selenium.By;
+import classdata.GroupData;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -13,13 +13,10 @@ import java.util.stream.Collectors;
 public class BookCreateGroupTest extends Base {
 
     private static Logger strLogger = Logger.getLogger(BookCreateGroupTest.class);
-    // private WebDriver driver;
 
 
     @Test(groups = "smoke", testName = "test_create_addressBook_group")
     public void testBookAddGroup() {
-
-        String groupListXpath = "//span[@class='group']";
 
         int randomGroupNumberGenerator = (int) (Math.random() * 100 + 3);
         String groupName = "GroupName_1_" + randomGroupNumberGenerator;
@@ -27,11 +24,11 @@ public class BookCreateGroupTest extends Base {
         String groupFooter = "GroupFooter_1_" + randomGroupNumberGenerator;
 
         GroupsPage groupsPage = new GroupsPage(driver);
-        groupsPage.createNewGroup(groupName, groupHeader, groupFooter);
+        groupsPage.createNewGroup(new GroupData(groupName, groupHeader, groupFooter));
         groupsPage.goToGroupListPage();
 
 
-        List<String> listOfAddressGroups = driver.findElements(By.xpath(groupListXpath))
+        List<String> listOfAddressGroups = groupsPage.getGroupsSection()
                 .stream().map(WebElement::getText)
                 .collect(Collectors.toList());
 

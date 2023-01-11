@@ -8,7 +8,6 @@ import org.testng.log4testng.Logger;
 public class BookLogInTest extends Base {
 
     private static Logger strLogger = Logger.getLogger(BookLogInTest.class);
-    // private WebDriver driver;
 
 
     @Test(groups = "smoke", testName = "test_login")

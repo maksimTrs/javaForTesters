@@ -14,7 +14,7 @@ public class HomePage {
 
 
     @FindBy(xpath = "//input[@name='logout']/following-sibling::a")
-    private WebElement homeBtn;
+    private WebElement logOutBtn;
 
 
     public HomePage(WebDriver driver) {
@@ -24,7 +24,7 @@ public class HomePage {
     }
 
     public String checkLogOutButton() {
-        webDriverWait.until(ExpectedConditions.visibilityOf(homeBtn));
-        return homeBtn.getText();
+        webDriverWait.until(ExpectedConditions.visibilityOf(logOutBtn));
+        return logOutBtn.getText();
     }
 }
