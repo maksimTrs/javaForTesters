@@ -1,33 +1,24 @@
 package ru.qa.addressbook;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
-
-import java.util.concurrent.TimeUnit;
 
 import static utils.SecretGetter.returnPass;
 
 public abstract class Base {
 
-    protected WebDriver driver;
-
-    private static  final String URL = "http://localhost/addressbook/";
+    private static final String URL = "http://localhost/addressbook/";
     private static final String PASS_BASE64 = "c2VjcmV0";
     private static final String USER_NAME = "admin";
-
+    protected WebDriver driver;
 
     @BeforeClass
     protected void setUp() {
 
-        driver = WebDriverManager.chromiumdriver().create();
+        driver = WebDriverManager.chromedriver().create();
 
-        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
 
         doSignIn();
@@ -38,6 +29,7 @@ public abstract class Base {
     protected void tearDown() {
         driver.quit();
     }
+
 
     private void doSignIn() {
         LogInPage logInPage = new LogInPage(driver);

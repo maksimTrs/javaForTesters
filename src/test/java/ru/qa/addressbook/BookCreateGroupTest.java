@@ -1,6 +1,5 @@
 package ru.qa.addressbook;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -8,7 +7,6 @@ import org.testng.annotations.Test;
 import org.testng.log4testng.Logger;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -21,33 +19,29 @@ public class BookCreateGroupTest extends Base {
     @Test(groups = "smoke", testName = "test_create_addressBook_group")
     public void testBookAddGroup() {
 
+        String groupListXpath = "//span[@class='group']";
 
-        driver.findElement(By.xpath("//li/a[text()='groups']")).click();
-        driver.findElement(By.xpath("//input[@value='New group'][1]")).click();
+        int randomGroupNumberGenerator = (int) (Math.random() * 100 + 3);
+        String groupName = "GroupName_1_" + randomGroupNumberGenerator;
+        String groupHeader = "GroupHeader_1_" + randomGroupNumberGenerator;
+        String groupFooter = "GroupFooter_1_" + randomGroupNumberGenerator;
 
-        //RandomStringUtils.randomAlphanumeric(10);  !!!
-
-        driver.findElement(By.xpath("//input[@name='group_name']")).sendKeys("Group_1"); //
-        //driver.findElement(By.xpath("//input[@name='group_header']")).click();
-        driver.findElement(By.xpath("//textarea[@name='group_header']")).sendKeys("Group_1_1");
-        // driver.findElement(By.xpath("//input[@name='group_footer']")).click();
-        driver.findElement(By.xpath("//textarea[@name='group_footer']")).sendKeys("Group_1_1_1");
-        driver.findElement(By.xpath("//input[@name='submit'][@value='Enter information']")).click();
+        GroupsPage groupsPage = new GroupsPage(driver);
+        groupsPage.createNewGroup(groupName, groupHeader, groupFooter);
+        groupsPage.goToGroupListPage();
 
 
-        driver.findElement(By.cssSelector("a[href*='group']")).click();
-
-
-        List<String> listOfAddressGroups = driver.findElements(By.xpath("//span[@class='group']"))
+        List<String> listOfAddressGroups = driver.findElements(By.xpath(groupListXpath))
                 .stream().map(WebElement::getText)
                 .collect(Collectors.toList());
+
         System.out.println(listOfAddressGroups);
 
         String testGroupName = listOfAddressGroups.stream()
-                .filter(group -> group.equals("Group_1"))
+                .filter(group -> group.equals(groupName))
                 .findFirst().orElse(null);
 
-        Assert.assertEquals(testGroupName, "Group_1");
+        Assert.assertEquals(testGroupName, groupName);
 
 
         strLogger.info("********************************************************************************");
@@ -58,12 +52,11 @@ public class BookCreateGroupTest extends Base {
         strLogger.info("Clear Group test data");
         strLogger.info("********************************************************************************");
 
-        driver.findElement(By.xpath("//span[@class='group']/input[contains(@title, 'Group_1')]")).click();
-        driver.findElement(By.xpath("//input[@name='delete'][2]")).click();
 
-        String checkDelete = driver.findElement(By.xpath("//div[@class='msgbox']")).getText();
+        groupsPage.deleteTestGroup(groupName);
+        String checkDeletion = groupsPage.checkGroupDeletion();
 
-        Assert.assertEquals(checkDelete, "Group has been removed.\n" +
+        Assert.assertEquals(checkDeletion, "Group has been removed.\n" +
                 "return to the group page");
 
     }
