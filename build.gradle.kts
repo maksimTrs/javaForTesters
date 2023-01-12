@@ -1,7 +1,10 @@
 plugins {
     id("java")
-    //  application
+    // id("application")
     id("io.freefair.lombok") version "6.6.1"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+
+
 }
 
 group = "org.example"
@@ -25,6 +28,8 @@ dependencies {
     implementation("org.seleniumhq.selenium:selenium-java:3.141.59")
     implementation("io.github.bonigarcia:webdrivermanager:5.3.1")
 
+//    implementation(files("build/libs/javaForTesters-1.0-SNAPSHOT.jar"))
+//    testImplementation(files("build/libs/javaForTesters-1.0-SNAPSHOT.jar"))
 
 }
 
@@ -34,7 +39,7 @@ tasks.getByName<Test>("test") {
     ignoreFailures = true
     useTestNG() {
         useDefaultListeners = true
-        //suites ("src/test/suite.xml")
+        suites("src/test/java/resources/testng.xml")
         // includeGroups("smoke")
     }
     testLogging {
@@ -43,6 +48,10 @@ tasks.getByName<Test>("test") {
 }
 
 //application {
-//    mainClass.set("org.example.Main")
+//    mainClass.set("utils.TestRunner")
+//}
+//
+//tasks.jar {
+//    manifest.attributes["Main-Class"] = "utils.TestRunner"
 //}
 
