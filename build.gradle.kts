@@ -2,7 +2,7 @@ plugins {
     id("java")
     // id("application")
     id("io.freefair.lombok") version "6.6.1"
-    id("com.github.johnrengelman.shadow") version "7.1.2"
+  //  id("com.github.johnrengelman.shadow") version "7.1.2"
 
 
 }
@@ -39,7 +39,7 @@ tasks.getByName<Test>("test") {
     ignoreFailures = true
     useTestNG() {
         useDefaultListeners = true
-        suites("src/test/java/resources/testng.xml")
+       // suites("src/test/java/resources/testng.xml")
         // includeGroups("smoke")
     }
     testLogging {

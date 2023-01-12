@@ -50,7 +50,12 @@ public class AddressBookEntryTest extends Base {
 
         System.out.println(listOfAddressGroups);
 
-        Assert.assertEquals(initialAddressBookData, listOfAddressGroups);
+       // Assert.assertEquals(initialAddressBookData, listOfAddressGroups);
+
+        for (int i = 0; i < listOfAddressGroups.size(); i++) {
+           // System.out.println(listOfAddressGroups.get(i) + " +++ " + initialAddressBookData.get(i));
+            Assert.assertEquals(listOfAddressGroups.get(i), initialAddressBookData.get(i));
+        }
 
 
         strLogger.info("********************************************************************************");

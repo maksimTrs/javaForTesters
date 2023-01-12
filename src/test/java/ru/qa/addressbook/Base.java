@@ -18,7 +18,8 @@ public abstract class Base {
 
         driver.manage().window().maximize();
 
-        new LogInHelper().doSignIn(driver);
+        LogInHelper logInHelper = new LogInHelper();
+        logInHelper.doSignIn(driver);
 
     }
 
