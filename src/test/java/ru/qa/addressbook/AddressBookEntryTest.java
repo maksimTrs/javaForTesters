@@ -20,7 +20,7 @@ public class AddressBookEntryTest extends Base {
     @Test(groups = "smoke", testName = "test_create_new_Address_Book_record")
     public void testBookAddRecord() {
 
-        int randomYearGenerator = ((int) (Math.random() * 25 + 1980)) + ((int) (Math.random() * 11) + ((int) (Math.random() * 7 + 3)));
+        int randomYearGenerator = ((int) (Math.random() * 25 + 1980)) + ((int) (Math.random() * 7 + 3));
         String firstName = "firstName_1_" + randomYearGenerator;
         String lastName = "lastName_1_" + randomYearGenerator;
         String bookCompany = "bookCompany_1_" + randomYearGenerator;
@@ -64,9 +64,9 @@ public class AddressBookEntryTest extends Base {
                 .collect(Collectors.toList());
         System.out.println(tableHeader);
 
-        String[] expectedHeaderValues = {"Last name", "First name", "Address", "All e-mail", "All phones"};
 
-        assertThat(tableHeader).as("check header column names").containsOnly(expectedHeaderValues);
+        String[] expectedHeaderValues = {"Last name", "First name", "Address", "All e-mail", "All phones"};
+        assertThat(tableHeader).as("check header column names").containsExactly(expectedHeaderValues);
 
 
         strLogger.info("********************************************************************************");
