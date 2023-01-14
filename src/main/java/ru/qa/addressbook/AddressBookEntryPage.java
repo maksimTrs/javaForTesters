@@ -77,6 +77,7 @@ public class AddressBookEntryPage {
 
     private String addressBookCheckbox = "//td[text()='%s']/preceding-sibling::td/input[@type='checkbox']";
     private String listOfCheckBoxes = "//td[@class='center']/input[@name='selected[]']";
+    private String tableHeader = "table#maintable > tbody > tr:first-of-type > th > a";
 
 
     public AddressBookEntryPage(WebDriver driver) {
@@ -168,5 +169,11 @@ public class AddressBookEntryPage {
     public List<WebElement> getListAddressBooks() {
         webDriverWait.until(ExpectedConditions.visibilityOf(addressBooksTable));
         return allListAddressBooks;
+    }
+
+    public List<WebElement> getHeaderTable() {
+        webDriverWait.until(ExpectedConditions.visibilityOf(addressBooksTable));
+
+        return driver.findElements(By.cssSelector(tableHeader));
     }
 }

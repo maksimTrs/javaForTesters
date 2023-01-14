@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class AddressBookEntryTest extends Base {
 
@@ -19,7 +20,7 @@ public class AddressBookEntryTest extends Base {
     @Test(groups = "smoke", testName = "test_create_new_Address_Book_record")
     public void testBookAddRecord() {
 
-        int randomYearGenerator = (int) (Math.random() * 25 + 1981);
+        int randomYearGenerator = ((int) (Math.random() * 25 + 1980)) + ((int) (Math.random() * 11) + ((int) (Math.random() * 7 + 3)));
         String firstName = "firstName_1_" + randomYearGenerator;
         String lastName = "lastName_1_" + randomYearGenerator;
         String bookCompany = "bookCompany_1_" + randomYearGenerator;
@@ -37,6 +38,7 @@ public class AddressBookEntryTest extends Base {
 
 
         AddressBookEntryPage addressBookEntryPage = new AddressBookEntryPage(driver);
+
         addressBookEntryPage.createNewAddressBook(new AddressBookData(firstName, lastName, bookCompany, bookMobile,
                 bookEmail, bDay, bMonth, randomYearGenerator, true));
 
@@ -50,12 +52,21 @@ public class AddressBookEntryTest extends Base {
 
         System.out.println(listOfAddressGroups);
 
-       // Assert.assertEquals(initialAddressBookData, listOfAddressGroups);
+        // Assert.assertEquals(initialAddressBookData, listOfAddressGroups);
 
         for (int i = 0; i < listOfAddressGroups.size(); i++) {
-           // System.out.println(listOfAddressGroups.get(i) + " +++ " + initialAddressBookData.get(i));
+            // System.out.println(listOfAddressGroups.get(i) + " +++ " + initialAddressBookData.get(i));
             Assert.assertEquals(listOfAddressGroups.get(i), initialAddressBookData.get(i));
         }
+
+        List<String> tableHeader = addressBookEntryPage.getHeaderTable().stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+        System.out.println(tableHeader);
+
+        String[] expectedHeaderValues = {"Last name", "First name", "Address", "All e-mail", "All phones"};
+
+        assertThat(tableHeader).as("check header column names").containsOnly(expectedHeaderValues);
 
 
         strLogger.info("********************************************************************************");
