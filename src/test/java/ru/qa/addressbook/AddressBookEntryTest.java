@@ -53,12 +53,12 @@ public class AddressBookEntryTest extends Base {
 
         System.out.println(listOfAddressGroups);
 
-        assertThat(listOfAddressGroups.stream().count()).isEqualTo(initialAddressBookData.stream().count());
-
-        for (int i = 0; i < listOfAddressGroups.size(); i++) {
-            // System.out.println(listOfAddressGroups.get(i) + " +++ " + initialAddressBookData.get(i));
-            Assert.assertEquals(listOfAddressGroups.get(i), initialAddressBookData.get(i));
-        }
+     //   assertThat(listOfAddressGroups.stream().count()).isEqualTo(initialAddressBookData.stream().count());
+//        for (int i = 0; i < listOfAddressGroups.size(); i++) {
+//            // System.out.println(listOfAddressGroups.get(i) + " +++ " + initialAddressBookData.get(i));
+//            Assert.assertEquals(listOfAddressGroups.get(i), initialAddressBookData.get(i));
+//        }
+        Assert.assertEquals(listOfAddressGroups, initialAddressBookData);
 
         List<String> tableHeader = addressBookEntryPage.getHeaderTable().stream()
                 .map(WebElement::getText)
