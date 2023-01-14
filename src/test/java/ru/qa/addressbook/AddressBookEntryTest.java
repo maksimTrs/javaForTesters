@@ -6,7 +6,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.log4testng.Logger;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,11 +29,7 @@ public class AddressBookEntryTest extends Base {
         String bDay = "25";
         String bMonth = "May";
 
-        List<String> initialAddressBookData = new ArrayList<>();
-        initialAddressBookData.add(lastName);
-        initialAddressBookData.add(firstName);
-        initialAddressBookData.add(bookEmail);
-        initialAddressBookData.add(bookMobile);
+        List<String> initialAddressBookData = Arrays.asList(lastName, firstName, bookEmail, bookMobile);
         System.out.println(initialAddressBookData);
 
 
