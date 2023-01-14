@@ -15,4 +15,6 @@ public class AddressBookData {
     private String day;
     private String month;
     private int year;
+
+    boolean checkNewBookData;
 }

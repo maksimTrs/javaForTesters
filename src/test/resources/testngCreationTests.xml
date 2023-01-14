@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="search-module" parallel="classes" thread-count="4">
+<suite name="entity-creation-tests" parallel="classes" thread-count="4">
     <!--    <parameter name="browserType" value="CHROME"/>-->
-    <test name="book-test-java">
+    <test name="book-tests">
         <!--        <parameter name="keyword" value="java"/>-->
         <classes>
             <class name="ru.qa.addressbook.BookLogInTest"/>

@@ -38,7 +38,7 @@ public class AddressBookEntryTest extends Base {
 
         AddressBookEntryPage addressBookEntryPage = new AddressBookEntryPage(driver);
         addressBookEntryPage.createNewAddressBook(new AddressBookData(firstName, lastName, bookCompany, bookMobile,
-                bookEmail, bDay, bMonth, randomYearGenerator));
+                bookEmail, bDay, bMonth, randomYearGenerator, true));
 
         addressBookEntryPage.goToAddressBookPage();
 
@@ -62,15 +62,6 @@ public class AddressBookEntryTest extends Base {
         strLogger.info("<<< Test method: " + AddressBookEntryTest.class.getMethods()[0].toString() + " passed >>>");
         strLogger.info("********************************************************************************");
 
-        strLogger.info("********************************************************************************");
-        strLogger.info("Clear Address Group test data");
-        strLogger.info("********************************************************************************");
-
-
-        addressBookEntryPage.deleteTestAddressBook(lastName);
-        String checkDeletion = addressBookEntryPage.checkAddrBookDeletion();
-
-        Assert.assertEquals(checkDeletion, "Record successful deleted");
 
     }
 }

@@ -45,16 +45,6 @@ public class BookCreateGroupTest extends Base {
         strLogger.info("<<< Test method: " + BookCreateGroupTest.class.getMethods()[0].toString() + " passed >>>");
         strLogger.info("********************************************************************************");
 
-        strLogger.info("********************************************************************************");
-        strLogger.info("Clear Group test data");
-        strLogger.info("********************************************************************************");
-
-
-        groupsPage.deleteTestGroup(groupName);
-        String checkDeletion = groupsPage.checkGroupDeletion();
-
-        Assert.assertEquals(checkDeletion, "Group has been removed.\n" +
-                "return to the group page");
 
     }
 

@@ -1,10 +1,7 @@
 package ru.qa.addressbook;
 
 import classdata.AddressBookData;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,6 +9,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+
+import static utils.PageObjectHelper.isAlertPresent;
+import static utils.PageObjectHelper.isElementPresent;
 
 public class AddressBookEntryPage {
 
@@ -21,6 +21,9 @@ public class AddressBookEntryPage {
 
     @FindBy(xpath = "//li/a[text()='add new']")
     private WebElement addressBookPartitionBtn;
+
+    @FindBy(xpath = "//a[text()='home']")
+    private WebElement homeBtn;
 
     @FindBy(name = "firstname")
     private WebElement addressBookFirstname;
@@ -46,6 +49,10 @@ public class AddressBookEntryPage {
     @FindBy(name = "byear")
     private WebElement addressBookSetBirthdayYear;
 
+    @FindBy(css = "select[name='new_group']")
+    private WebElement bookSelector;
+
+
     @FindBy(xpath = "//input[@value='Enter'][2]")
     private WebElement addressBookSubmitBtn;
 
@@ -67,6 +74,9 @@ public class AddressBookEntryPage {
 
     @FindBy(xpath = "//div[text()='Record successful deleted']")
     private WebElement deletedTextVerification;
+
+    private String addressBookCheckbox = "//td[text()='%s']/preceding-sibling::td/input[@type='checkbox']";
+    private String listOfCheckBoxes = "//td[@class='center']/input[@name='selected[]']";
 
 
     public AddressBookEntryPage(WebDriver driver) {
@@ -93,6 +103,14 @@ public class AddressBookEntryPage {
         mDay.selectByVisibleText(addressBookData.getMonth());
         addressBookSetBirthdayYear.sendKeys("" + addressBookData.getYear());
 
+
+        if (addressBookData.isCheckNewBookData()) {
+            new Select(bookSelector).selectByValue("[none]");
+        } else {
+            if (isElementPresent(bookSelector))
+                throw new IllegalArgumentException("Issue was found - group selector is active for edit addressBook entity");
+        }
+
         webDriverWait.until(ExpectedConditions.elementToBeClickable(addressBookSubmitBtn));
         addressBookSubmitBtn.click();
 
@@ -105,16 +123,46 @@ public class AddressBookEntryPage {
 
     public void deleteTestAddressBook(String addressBookLastName) {
         webDriverWait.until(ExpectedConditions.visibilityOf(addressBooksTable));
-        driver.findElement(By.xpath(String.format("//td[text()='%s']/preceding-sibling::td/input[@type='checkbox']", addressBookLastName))).click();
+        driver.findElement(By.xpath(String.format(addressBookCheckbox, addressBookLastName))).click();
         deleteAddrBookBtn.click();
 
-        Alert al = driver.switchTo().alert();
-        al.accept();
+
+        if (isAlertPresent(driver)) {
+            Alert al = driver.switchTo().alert();
+            al.accept();
+        }
     }
 
+    public void deleteTestAddressBook() {
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(homeBtn));
+        homeBtn.click();
+
+        webDriverWait.until(ExpectedConditions.visibilityOf(addressBooksTable));
+
+        List<WebElement> listOfAddressBooks = driver.findElements(By.xpath(listOfCheckBoxes));
+
+        for (WebElement webElement : listOfAddressBooks) {
+            webElement.click();
+        }
+        deleteAddrBookBtn.click();
+
+        if (isAlertPresent(driver)) {
+            Alert al = driver.switchTo().alert();
+            al.accept();
+        }
+    }
+
+
     public String checkAddrBookDeletion() {
-        webDriverWait.until(ExpectedConditions.visibilityOf(deletedTextVerification));
-        return deletedTextVerification.getText();
+        // webDriverWait.until(ExpectedConditions.visibilityOf(deletedTextVerification));
+      //  return deletedTextVerification.getText();
+
+        try {
+            return deletedTextVerification.getText();
+        } catch (NoSuchElementException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     public List<WebElement> getListAddressBooks() {

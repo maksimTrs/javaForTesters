@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="entity-deletion-tests" parallel="classes" thread-count="4">
+    <!--    <parameter name="browserType" value="CHROME"/>-->
+    <test name="book-deletion-tests">
+        <!--        <parameter name="keyword" value="java"/>-->
+        <classes>
+            <class name="ru.qa.addressbook.BookDeletionTest"/>
+            <class name="ru.qa.addressbook.AddressBookEntryDeletionTest"/>
+        </classes>
+    </test>
+</suite>
