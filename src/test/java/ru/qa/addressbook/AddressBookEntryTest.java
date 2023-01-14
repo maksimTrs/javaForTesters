@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AddressBookEntryTest extends Base {
@@ -20,7 +21,7 @@ public class AddressBookEntryTest extends Base {
     @Test(groups = "smoke", testName = "test_create_new_Address_Book_record")
     public void testBookAddRecord() {
 
-        int randomYearGenerator = ((int) (Math.random() * 25 + 1980)) + ((int) (Math.random() * 7 + 3));
+        int randomYearGenerator = ((int) (Math.random() * 25 + 1979)) + ((int) (Math.random() * 7 + 3));
         String firstName = "firstName_1_" + randomYearGenerator;
         String lastName = "lastName_1_" + randomYearGenerator;
         String bookCompany = "bookCompany_1_" + randomYearGenerator;
@@ -52,7 +53,7 @@ public class AddressBookEntryTest extends Base {
 
         System.out.println(listOfAddressGroups);
 
-        // Assert.assertEquals(initialAddressBookData, listOfAddressGroups);
+        assertThat(listOfAddressGroups.stream().count()).isEqualTo(initialAddressBookData.stream().count());
 
         for (int i = 0; i < listOfAddressGroups.size(); i++) {
             // System.out.println(listOfAddressGroups.get(i) + " +++ " + initialAddressBookData.get(i));
