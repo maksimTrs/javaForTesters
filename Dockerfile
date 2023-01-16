@@ -33,11 +33,11 @@ RUN gradle assemble
 #RUN cd /app/src
 
 #ENTRYPOINT gradle test -DBROWSER=$BROWSER -DHUB_HOST=$HUB_HOST   $MODULE
-ENTRYPOINT gradle clean test  -DBROWSER=$BROWSER -DHUB_HOST=$HUB_HOST   $MODULE
+ENTRYPOINT gradle clean test $HUB_HOST $BROWSER $MODULE
+#-DBROWSER=$BROWSER -DHUB_HOST=$HUB_HOST   $MODULE
 #$MODULE
 
-# docker run   -e  MODULE="-Psuite1 -Psuite2"  --rm  roronoazorroippo/java-for-testers-1
 
-# docker build -t roronoazorroippo/java-for-testers-2 .
+#  docker build -t roronoazorroippo/java-for-testers-1 .
 
 # docker run  -e BROWSER=FIREFOX  -e HUB_HOST=192.168.0.191  -e  MODULE="-Psuite1 -Psuite2"  --rm  roronoazorroippo/java-for-testers-1

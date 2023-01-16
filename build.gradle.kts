@@ -38,6 +38,16 @@ dependencies {
 
 tasks.getByName<Test>("test") {
     ignoreFailures = true
+
+    if (project.hasProperty("firefox")) {
+        // System.setProperty("BROWSER", "FIREFOX");
+        systemProperty("BROWSER", "FIREFOX");
+    }
+    if (project.hasProperty("hub_host")) {
+        // System.setProperty("BROWSER", "FIREFOX");
+        systemProperty("HUB_HOST", "192.168.0.191");
+    }
+
     useTestNG() {
         useDefaultListeners = true
         // suites("src/test/java/resources/testng.xml")
