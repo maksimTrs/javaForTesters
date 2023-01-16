@@ -40,4 +40,5 @@ ENTRYPOINT gradle clean test $HUB_HOST $BROWSER $MODULE
 
 #  docker build -t roronoazorroippo/java-for-testers-1 .
 
-# docker run  -e BROWSER=FIREFOX  -e HUB_HOST=192.168.0.191  -e  MODULE="-Psuite1 -Psuite2"  --rm  roronoazorroippo/java-for-testers-1
+#  docker run -e HUB_HOST=-Phub_host  -e BROWSER=-Pfirefox   -e  MODULE="-Psuite1 -Psuite2" --name java-for-testers   roronoazo
+  #rroippo/java-for-testers-1
