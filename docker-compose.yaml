@@ -32,6 +32,34 @@ services:
       - SE_NODE_MAX_INSTANCES=4
       - SE_NODE_MAX_SESSIONS=4
 
-# docker compose up
-# docker compose up  -d --scale chrome=3 --scale firefox=3
-# mvn clean package -DskipTests
+  # docker compose up
+  # docker compose up  -d --scale chrome=3 --scale firefox=3
+  # mvn clean package -DskipTests
+
+#  db:
+#    image: mysql
+#    command: --default-authentication-plugin=mysql_native_password
+#    restart: always
+#    environment:
+#      MYSQL_ROOT_PASSWORD: password
+#
+#  phpmyadmin:
+#    image: phpmyadmin
+#    restart: always
+#    ports:
+#      - 8002:80
+#    environment:
+#      - PMA_ARBITRARY=1
+
+#  bookflight_test:
+#    image: roronoazorroippo/seleniumdockerproject:latest
+#    container_name: bookflight_container
+#    volumes:
+#      - E:\MAX\IT\UDEMY\Selenium_WebDriver_with_Docker_Jenkins_AWS\test-output-bookFlight:/usr/share/udemy/test-output
+#    environment:
+#      - BROWSER=chrome
+#      - HUB_HOST=hub
+#      - MODULE=book-flight-module.xml
+#    depends_on:
+#      - firefox
+#      - chrome

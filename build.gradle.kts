@@ -52,6 +52,10 @@ tasks.getByName<Test>("test") {
             // dependsOn(suites("./src/test/resources/testngCreationTests.xml"))
             suites("src/test/resources/testngDeletionTests.xml")
         }
+//        if (project.hasProperty("firefox")) {
+//            // System.setProperty("BROWSER", "FIREFOX");
+//            environment("BROWSER", "FIREFOX");
+//        }
     }
     testLogging {
         events("PASSED", "FAILED", "SKIPPED")
