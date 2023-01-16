@@ -27,7 +27,7 @@ public class LocalDriverManager {
         return driver;
     }
 
-     public enum BrowserType {
+    public enum BrowserType {
         LOCAL, SELENIUM_GRID
     }
 }

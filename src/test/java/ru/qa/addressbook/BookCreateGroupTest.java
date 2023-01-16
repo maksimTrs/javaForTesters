@@ -9,6 +9,8 @@ import org.testng.log4testng.Logger;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static utils.NumberGenerator.generateNumber;
+
 
 public class BookCreateGroupTest extends Base {
 
@@ -19,9 +21,9 @@ public class BookCreateGroupTest extends Base {
     public void testBookAddGroup() {
 
         int randomGroupNumberGenerator = (int) (Math.random() * 100 + 3);
-        String groupName = "GroupName_1_" + randomGroupNumberGenerator;
-        String groupHeader = "GroupHeader_1_" + randomGroupNumberGenerator;
-        String groupFooter = "GroupFooter_1_" + randomGroupNumberGenerator;
+        String groupName = "GroupName_" + generateNumber() + "_" + randomGroupNumberGenerator;
+        String groupHeader = "GroupHeader_" + generateNumber() + "_" + randomGroupNumberGenerator;
+        String groupFooter = "GroupFooter_" + generateNumber() + "_" + randomGroupNumberGenerator;
 
         GroupsPage groupsPage = new GroupsPage(driver);
         groupsPage.createNewGroup(new GroupData(groupName, groupHeader, groupFooter));

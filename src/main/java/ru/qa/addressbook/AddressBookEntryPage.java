@@ -155,8 +155,8 @@ public class AddressBookEntryPage {
 
 
     public String checkAddrBookDeletion() {
-         webDriverWait.until(ExpectedConditions.visibilityOf(deletedTextVerification));
-      //  return deletedTextVerification.getText();
+        webDriverWait.until(ExpectedConditions.visibilityOf(deletedTextVerification));
+        //  return deletedTextVerification.getText();
 
         try {
             return deletedTextVerification.getText();

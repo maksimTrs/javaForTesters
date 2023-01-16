@@ -32,7 +32,6 @@ public class BookDeletionTest extends Base {
         Assert.assertNull(checkDeletionWrongText);
 
 
-
         strLogger.info("********************************************************************************");
         strLogger.info("<<< Test method: " + BookDeletionTest.class.getMethods()[0].toString() + " passed >>>");
         strLogger.info("********************************************************************************");

@@ -4,8 +4,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.log4testng.Logger;
 
-import static utils.SecretGetter.handlingPassword;
-
 
 public class BookLogInTest extends Base {
 
