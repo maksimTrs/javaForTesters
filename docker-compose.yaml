@@ -30,8 +30,8 @@ services:
       - SE_NODE_MAX_INSTANCES=4
       - SE_NODE_MAX_SESSIONS=4
   java_project_test:
-    #image: roronoazorroippo/java-for-testers-1
-    build: .
+    image: roronoazorroippo/java-for-testers-1
+    #build: .
     container_name: java-for-testers-tests-1
     depends_on:
       - chrome
@@ -52,9 +52,9 @@ services:
     ports:
       - "41061:22"
       - "41062:80"
-#    depends_on:
-#      - chrome
-#      - hub
+  #    depends_on:
+  #      - chrome
+  #      - hub
 
   # docker compose up
   # docker compose up  -d --scale chrome=3 --scale firefox=3

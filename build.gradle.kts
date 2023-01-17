@@ -97,6 +97,6 @@ allure {
         reportDir.set(project.reporting.baseDirectory.dir("allure-report"))
         adapter.autoconfigure
         adapter.aspectjWeaver
-       // dependsOnTests.set(false)  // ./gradlew allureReport --depends-on-tests
+        // dependsOnTests.set(false)  // ./gradlew allureReport --depends-on-tests
     }
 }

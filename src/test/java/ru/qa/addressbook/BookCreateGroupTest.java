@@ -23,7 +23,7 @@ public class BookCreateGroupTest extends Base {
         int randomGroupNumberGenerator = (int) (Math.random() * 100 + 3);
         String groupName = "GroupName_" + generateNumber() + "_" + randomGroupNumberGenerator;
         String groupHeader = "GroupHeader_1_" + randomGroupNumberGenerator;
-        String groupFooter = "GroupFooter_1_"  + randomGroupNumberGenerator;
+        String groupFooter = "GroupFooter_1_" + randomGroupNumberGenerator;
 
         GroupsPage groupsPage = new GroupsPage(driver);
         groupsPage.createNewGroup(new GroupData(groupName, groupHeader, groupFooter));

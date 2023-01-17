@@ -17,7 +17,6 @@ public abstract class Base {
     private LogInHelper logInHelper;
 
 
-
     @BeforeClass
     public void setUp() throws MalformedURLException {
 
@@ -25,6 +24,7 @@ public abstract class Base {
 //        driver.manage().window().maximize();
 
         String host = "192.168.0.191"; //   IPv4-адрес 192.168.0.191   localhost
+        //  String host = "localhost";
         String browserType = "CHROME"; // FIREFOX  CHROME
 
 

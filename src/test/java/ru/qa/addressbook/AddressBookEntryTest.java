@@ -17,8 +17,8 @@ import static utils.NumberGenerator.generateNumber;
 public class AddressBookEntryTest extends Base {
 
     private static Logger strLogger = Logger.getLogger(AddressBookEntryTest.class);
-    private String lastName;
     private static List<String> initialAddressBookData;
+    private String lastName;
     private AddressBookEntryPage addressBookEntryPage;
 
 
@@ -27,7 +27,7 @@ public class AddressBookEntryTest extends Base {
         int randomYearGenerator = ((int) (Math.random() * 25 + 1979)) + ((int) (Math.random() * 7 + 3));
         String firstName = "firstName_1_" + randomYearGenerator;
         lastName = "lastName_" + generateNumber() + "_" + randomYearGenerator;
-        String bookCompany = "bookCompany_1_"  + randomYearGenerator;
+        String bookCompany = "bookCompany_1_" + randomYearGenerator;
         String bookMobile = "+79031" + generateNumber() + randomYearGenerator;
         String bookEmail = "bookEmail_1_" + randomYearGenerator + "@test.com";
         String bDay = "25";
