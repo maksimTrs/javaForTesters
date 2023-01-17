@@ -24,6 +24,8 @@ dependencies {
     implementation(group = "org.apache.logging.log4j", name = "log4j-slf4j-impl", version = "2.19.0")
     implementation(group = "org.apache.logging.log4j", name = "log4j-core", version = "2.19.0")
     implementation(group = "org.slf4j", name = "slf4j-log4j12", version = "2.0.6")
+    implementation("io.qameta.allure:allure-testng:2.20.1")
+
 
     testImplementation("org.testng:testng:7.7.1")
     implementation("org.seleniumhq.selenium:selenium-java:3.141.59")
@@ -39,6 +41,7 @@ dependencies {
 
 tasks.getByName<Test>("test") {
     ignoreFailures = true
+    systemProperty("allure.results.directory", "/app/allure-results")
 
     if (project.hasProperty("firefox")) {
         // System.setProperty("BROWSER", "FIREFOX");
@@ -48,7 +51,7 @@ tasks.getByName<Test>("test") {
         // System.setProperty("BROWSER", "FIREFOX");
         systemProperty("HUB_HOST", "192.168.0.191");
     }
-
+    //reports.html.isEnabled = true
     useTestNG() {
         useDefaultListeners = true
         // suites("src/test/java/resources/testng.xml")

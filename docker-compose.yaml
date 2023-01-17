@@ -39,6 +39,7 @@ services:
     volumes:
       - E:\MAX\IT\Logging\java_for_testers\logs:/app/logs
       - E:\MAX\IT\Logging\java_for_testers\allure-report:/app/reports
+      - E:\MAX\IT\Logging\java_for_testers\allure-report\allure-results:/app/allure-results
     environment:
       - HUB_HOST=-Phub_host
       - BROWSER=-Pchrome

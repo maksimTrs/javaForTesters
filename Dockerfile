@@ -45,3 +45,5 @@ ENTRYPOINT gradle clean test $HUB_HOST $BROWSER $MODULE  allureReport
   #rroippo/java-for-testers-1
 
  # docker run --name myXampp -p 41061:22 -p 41062:80  -v E:\MAX\IT\xampp\htdocs\addressbook:/www   roronoazorroippo/xampp-with-addressbook-app:5
+
+ # allure serve
