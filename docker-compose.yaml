@@ -2,7 +2,7 @@ version: "3"
 services:
   hub:
     image: selenium/hub:4.1.0
-    container_name: selenium-hub-local
+    container_name: selenium-hub-java-for-testers-1
     ports:
       - "4442:4442"
       - "4443:4443"
@@ -21,8 +21,6 @@ services:
   firefox:
     image: selenium/node-firefox:4.1.0
     shm_size: 2gb
-    #volumes:
-    #- ./downloads:/home/seluser/Downloads
     depends_on:
       - hub
     environment:
@@ -31,35 +29,32 @@ services:
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
       - SE_NODE_MAX_INSTANCES=4
       - SE_NODE_MAX_SESSIONS=4
+  java_project_test:
+    #image: roronoazorroippo/java-for-testers-1
+    build: .
+    container_name: java-for-testers-tests-1
+    depends_on:
+      - chrome
+      - xampp_with_book_app
+    volumes:
+      - E:\MAX\IT\Logging\java_for_testers\logs:/app/logs
+    environment:
+      - HUB_HOST=-Phub_host
+      - BROWSER=-Pchrome
+      - MODULE=-Psuite1 -Psuite2
+  xampp_with_book_app:
+    image: roronoazorroippo/xampp-with-addressbook-app:5
+    container_name: xampp-with-addressbook-1
+    volumes:
+      - E:\MAX\IT\xampp\htdocs\addressbook:/www
+    ports:
+      - "41061:22"
+      - "41062:80"
+#    depends_on:
+#      - chrome
+#      - hub
 
   # docker compose up
   # docker compose up  -d --scale chrome=3 --scale firefox=3
-  # mvn clean package -DskipTests
 
-#  db:
-#    image: mysql
-#    command: --default-authentication-plugin=mysql_native_password
-#    restart: always
-#    environment:
-#      MYSQL_ROOT_PASSWORD: password
-#
-#  phpmyadmin:
-#    image: phpmyadmin
-#    restart: always
-#    ports:
-#      - 8002:80
-#    environment:
-#      - PMA_ARBITRARY=1
 
-#  bookflight_test:
-#    image: roronoazorroippo/seleniumdockerproject:latest
-#    container_name: bookflight_container
-#    volumes:
-#      - E:\MAX\IT\UDEMY\Selenium_WebDriver_with_Docker_Jenkins_AWS\test-output-bookFlight:/usr/share/udemy/test-output
-#    environment:
-#      - BROWSER=chrome
-#      - HUB_HOST=hub
-#      - MODULE=book-flight-module.xml
-#    depends_on:
-#      - firefox
-#      - chrome

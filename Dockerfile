@@ -24,7 +24,7 @@ COPY build.gradle.kts /app/build.gradle.kts
 
 WORKDIR /app
 
-EXPOSE 8080
+#EXPOSE 8080
 
 #RUN gradle build #--no-daemon
 RUN gradle assemble
@@ -42,3 +42,5 @@ ENTRYPOINT gradle clean test $HUB_HOST $BROWSER $MODULE
 
 #  docker run -e HUB_HOST=-Phub_host  -e BROWSER=-Pfirefox   -e  MODULE="-Psuite1 -Psuite2" --name java-for-testers   roronoazo
   #rroippo/java-for-testers-1
+
+ # docker run --name myXampp -p 41061:22 -p 41062:80  -v E:\MAX\IT\xampp\htdocs\addressbook:/www   roronoazorroippo/xampp-with-addressbook-app:5
