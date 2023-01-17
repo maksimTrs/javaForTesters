@@ -82,16 +82,16 @@ tasks.getByName<Test>("test") {
 //}
 
 
-//reporting {
-//    baseDir = "javaForTesters/reports"
-//}
+reporting {
+    baseDir = File("/app/reports")
+}
 
 allure {
     report {
         // There might be several tasks producing the report, so the property
         // configures a base directory for all the reports
         // Each task creates its own subfolder there
-        reportDir.set(project.reporting.baseDirectory.dir("/app/allure-report"))
+        reportDir.set(project.reporting.baseDirectory.dir("allure-report"))
         adapter.autoconfigure
         adapter.aspectjWeaver
        // dependsOnTests.set(false)  // ./gradlew allureReport --depends-on-tests
