@@ -3,7 +3,8 @@ plugins {
     // id("application")
     id("io.freefair.lombok") version "6.6.1"
     //  id("com.github.johnrengelman.shadow") version "7.1.2"
-
+    id("io.qameta.allure") version "2.11.2"
+    //id("io.qameta.allure-aggregate-report") version "2.11.2"
 
 }
 
@@ -80,3 +81,19 @@ tasks.getByName<Test>("test") {
 //    manifest.attributes["Main-Class"] = "utils.TestRunner"
 //}
 
+
+//reporting {
+//    baseDir = "javaForTesters/reports"
+//}
+
+allure {
+    report {
+        // There might be several tasks producing the report, so the property
+        // configures a base directory for all the reports
+        // Each task creates its own subfolder there
+        reportDir.set(project.reporting.baseDirectory.dir("/app/allure-report"))
+        adapter.autoconfigure
+        adapter.aspectjWeaver
+       // dependsOnTests.set(false)  // ./gradlew allureReport --depends-on-tests
+    }
+}

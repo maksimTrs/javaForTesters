@@ -38,6 +38,7 @@ services:
       - xampp_with_book_app
     volumes:
       - E:\MAX\IT\Logging\java_for_testers\logs:/app/logs
+      - E:\MAX\IT\Logging\java_for_testers\allure-report:/app/allure-report
     environment:
       - HUB_HOST=-Phub_host
       - BROWSER=-Pchrome

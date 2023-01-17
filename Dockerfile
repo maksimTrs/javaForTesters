@@ -33,7 +33,8 @@ RUN gradle assemble
 #RUN cd /app/src
 
 #ENTRYPOINT gradle test -DBROWSER=$BROWSER -DHUB_HOST=$HUB_HOST   $MODULE
-ENTRYPOINT gradle clean test $HUB_HOST $BROWSER $MODULE
+ENTRYPOINT gradle clean test $HUB_HOST $BROWSER $MODULE  allureReport
+#  gradle allureReport
 #-DBROWSER=$BROWSER -DHUB_HOST=$HUB_HOST   $MODULE
 #$MODULE
 
