@@ -1,5 +1,8 @@
-# javaForTesters
-project contains 3 parts: 
+# javaForTesters.  
+# Project base: Selenium + TestNG + Dockerfile + docker-compose.yaml + Gradle 
+
+
+#project contains 3 parts: 
 1) Code base for testing
 2) Tests
 3) Xampp app 
