@@ -1,14 +1,14 @@
 version: "3"
 services:
   hub:
-    image: selenium/hub:4.1.0
+    image: selenium/hub:4.7.2-20221219
     container_name: selenium-hub-java-for-testers-1
     ports:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
   chrome:
-    image: selenium/node-chrome:4.1.0
+    image: selenium/node-chrome:4.7.2-20221219
     shm_size: 2gb
     depends_on:
       - hub
@@ -19,7 +19,7 @@ services:
       - SE_NODE_MAX_INSTANCES=4
       - SE_NODE_MAX_SESSIONS=4
   firefox:
-    image: selenium/node-firefox:4.1.0
+    image: selenium/node-firefox:4.7.2-20221219
     shm_size: 2gb
     depends_on:
       - hub
@@ -38,8 +38,9 @@ services:
       - xampp_with_book_app
     volumes:
       - E:\MAX\IT\Logging\java_for_testers\logs:/app/logs
-      - E:\MAX\IT\Logging\java_for_testers\allure-report:/app/reports
-      - E:\MAX\IT\Logging\java_for_testers\allure-report\allure-results:/app/allure-results
+      - E:\MAX\IT\Logging\java_for_testers\allure-report:/app/reports/allure-report
+      - E:\MAX\IT\Logging\java_for_testers\tests:/app/reports/tests
+      - E:\MAX\IT\Logging\java_for_testers\allure-results:/app/allure-results
     environment:
       - HUB_HOST=-Phub_host
       - BROWSER=-Pchrome
@@ -52,9 +53,26 @@ services:
     ports:
       - "41061:22"
       - "41062:80"
-  #    depends_on:
-  #      - chrome
-  #      - hub
+  chrome_video:
+    image: selenium/video:ffmpeg-4.3.1-20221219
+    volumes:
+      - E:\MAX\IT\Logging\java_for_testers\chrome:/videos
+    depends_on:
+      - chrome
+    environment:
+      - DISPLAY_CONTAINER_NAME=chrome
+      - FILE_NAME=chrome_video.mp4
+  firefox_video:
+    image: selenium/video:ffmpeg-4.3.1-20221219
+    volumes:
+      - E:\MAX\IT\Logging\java_for_testers\firefox:/videos
+    depends_on:
+      - firefox
+    environment:
+      - DISPLAY_CONTAINER_NAME=firefox
+      - FILE_NAME=firefox_video.mp4
+
+
 
   # docker compose up
   # docker compose up  -d --scale chrome=3 --scale firefox=3
