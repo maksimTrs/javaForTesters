@@ -18,6 +18,7 @@ public class LocalDriverManager {
 
         if (browserType.equals(BrowserType.SELENIUM_GRID)) {
             driver = WebDriverManager.getInstance(driverManagerType).remoteAddress(path).create();
+            driver.manage().window().maximize();
 
         } else if (browserType.equals(BrowserType.LOCAL)) {
             driver = WebDriverManager.getInstance(driverManagerType).create();
