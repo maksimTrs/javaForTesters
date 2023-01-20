@@ -10,7 +10,8 @@ public class LogInHelper {
 
     // private static final String URL = "http://localhost/addressbook/";
     // private static final String URL = "http://192.168.0.191/addressbook/";
-    private static final String URL = "http://192.168.0.191:41062/www/index.php";  //  IPv4-адрес http://192.168.0.191/addressbook/  http://localhost:41062/www/index.php
+    private static String host = "192.168.0.191";
+    private static final String URL = "http://" + host + ":41062/www/index.php";  //  IPv4-адрес http://192.168.0.191/addressbook/  http://localhost:41062/www/index.php
     private static final String PASS_BASE64 = "c2VjcmV0";
     private static final String USER_NAME = "admin";
 
