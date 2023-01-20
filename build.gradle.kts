@@ -13,8 +13,6 @@ version = "1.0-SNAPSHOT"
 
 
 
-
-
 repositories {
     mavenCentral()
 }
@@ -31,6 +29,7 @@ dependencies {
     implementation("org.seleniumhq.selenium:selenium-java:3.141.59")
     implementation("io.github.bonigarcia:webdrivermanager:5.3.1")
     testImplementation("org.assertj:assertj-core:3.24.1")
+   // implementation(gradleApi())
 
 //    implementation(files("build/libs/javaForTesters-1.0-SNAPSHOT.jar"))
 //    testImplementation(files("build/libs/javaForTesters-1.0-SNAPSHOT.jar"))
@@ -49,7 +48,8 @@ tasks.getByName<Test>("test") {
     }
     if (project.hasProperty("hub_host")) {
         // System.setProperty("BROWSER", "FIREFOX");
-        systemProperty("HUB_HOST", "192.168.0.191");
+        systemProperty("HUB_HOST", "192.168.0.191")
+
     }
     //reports.html.isEnabled = true
     useTestNG() {
