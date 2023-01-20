@@ -29,7 +29,7 @@ dependencies {
     implementation("org.seleniumhq.selenium:selenium-java:3.141.59")
     implementation("io.github.bonigarcia:webdrivermanager:5.3.1")
     testImplementation("org.assertj:assertj-core:3.24.1")
-   // implementation(gradleApi())
+    // implementation(gradleApi())
 
 //    implementation(files("build/libs/javaForTesters-1.0-SNAPSHOT.jar"))
 //    testImplementation(files("build/libs/javaForTesters-1.0-SNAPSHOT.jar"))

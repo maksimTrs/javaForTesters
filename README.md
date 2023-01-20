@@ -13,8 +13,9 @@
 For Xampp docker compose part need to use "addressbook.7z" folder with service data.
 xampp_with_book_app:
 volumes:
+
 - {path tp the unziped addressbook.7z}:/www
-By default, addressbook folder has Xampp location: \\xampp\htdocs\addressbook
+  By default, addressbook folder has Xampp location: \\xampp\htdocs\addressbook
 
 Separate image parts of the app:
 

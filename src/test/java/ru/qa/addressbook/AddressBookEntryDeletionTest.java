@@ -10,7 +10,7 @@ public class AddressBookEntryDeletionTest extends Base {
 
 
     @Test(groups = "smoke", testName = "test_delete_addressBook_group")
-    public void testDeleteGroup() {
+    public void testDeleteAddressGroup() {
 
         strLogger.info("********************************************************************************");
         strLogger.info("Clear Address Group test data");
