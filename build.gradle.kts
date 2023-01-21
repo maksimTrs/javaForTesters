@@ -48,7 +48,7 @@ tasks.getByName<Test>("test") {
     }
     if (project.hasProperty("hub_host")) {
         // System.setProperty("BROWSER", "FIREFOX");
-        systemProperty("HUB_HOST", "192.168.0.191")
+        systemProperty("HUB_HOST", "host.docker.internal")
 
     }
     //reports.html.isEnabled = true

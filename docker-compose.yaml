@@ -32,6 +32,8 @@ services:
   java_project_test:
     image: roronoazorroippo/java-for-testers-1
     #build: .
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     container_name: java-for-testers-tests-1
     depends_on:
       - chrome
