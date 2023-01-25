@@ -12,11 +12,12 @@ public class LogInHelper {
     private static final String USER_NAME = "admin";
     // private static final String URL = "http://localhost/addressbook/";
     // private static final String URL = "http://192.168.0.191/addressbook/";
+    // private static final String URL = "http://192.168.0.191:41062/www/group.php";
     // private static String host = "192.168.0.191";
     //
-    // private static String host = IpV4AddressHelper.getIpV4MachineAddress();
     private static String host = System.getProperty("HUB_HOST");
-    private static final String URL = "http://" + host + ":41062/www/index.php";  //  IPv4-адрес http://192.168.0.191/addressbook/  http://localhost:41062/www/index.php
+    private static String port = "41062";
+    private static final String URL = "http://" + host + ":" + port + "/www/index.php";  //  IPv4-адрес http://192.168.0.191/addressbook/  http://localhost:41062/www/index.php
 
     public void doSignIn(WebDriver driver) {
         LogInPage logInPage = new LogInPage(driver);

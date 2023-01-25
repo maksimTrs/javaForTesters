@@ -7,6 +7,7 @@
             <class name="ru.qa.addressbook.BookLogInTest"/>
             <class name="ru.qa.addressbook.BookCreateGroupTest"/>
             <class name="ru.qa.addressbook.AddressBookEntryTest"/>
+            <class name="ru.qa.addressbook.AddressBookEntryPhotoTest"/>
         </classes>
     </test>
 </suite>

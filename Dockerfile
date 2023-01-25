@@ -21,6 +21,7 @@ COPY build.gradle.kts /app/build.gradle.kts
 #COPY settings.gradle.kts /app/settings.gradle.kts
 #COPY gradlew /app/gradlew
 #COPY gradlew.bat /app/gradlew.bat
+#RUN mkdir -p /app/images
 
 WORKDIR /app
 

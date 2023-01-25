@@ -75,9 +75,13 @@ public class AddressBookEntryPage {
     @FindBy(xpath = "//div[text()='Record successful deleted']")
     private WebElement deletedTextVerification;
 
+    @FindBy(name = "photo")
+    private WebElement photoFileUploaderBtn;
+
     private String addressBookCheckbox = "//td[text()='%s']/preceding-sibling::td/input[@type='checkbox']";
     private String listOfCheckBoxes = "//td[@class='center']/input[@name='selected[]']";
     private String tableHeader = "table#maintable > tbody > tr:first-of-type > th > a";
+    private String detailPageBtn = "//tr[@name='entry']//td[text()='%s']/following-sibling::td/a[contains(@href, 'view.php')]";
 
 
     public AddressBookEntryPage(WebDriver driver) {
@@ -176,4 +180,38 @@ public class AddressBookEntryPage {
 
         return driver.findElements(By.cssSelector(tableHeader));
     }
+
+
+    public AddressBookDetailedPage gotToTheAddressBookDetailPage(String addressBookLastName) {
+        webDriverWait.until(ExpectedConditions.visibilityOf(addressBooksTable));
+        driver.findElement(By.xpath(String.format(detailPageBtn, addressBookLastName))).click();
+        return new AddressBookDetailedPage(driver);
+    }
+
+
+    public void createNewAddressBookWithPhoto(AddressBookData addressBookData) {
+        webDriverWait.until(ExpectedConditions.visibilityOf(addressBookPartitionBtn));
+        addressBookPartitionBtn.click();
+
+        webDriverWait.until(ExpectedConditions.visibilityOf(addressBookFirstname));
+        addressBookFirstname.sendKeys(addressBookData.getFirstName());
+        addressBookLastname.sendKeys(addressBookData.getLastName());
+        addressBookCompany.sendKeys(addressBookData.getBookCompany());
+        addressBookMobile.sendKeys(addressBookData.getBookMobile());
+        addressBookEmail.sendKeys(addressBookData.getBookEmail());
+
+        photoFileUploaderBtn.sendKeys(addressBookData.getFilePath());
+
+        if (addressBookData.isCheckNewBookData()) {
+            new Select(bookSelector).selectByValue("[none]");
+        } else {
+            if (isElementPresent(bookSelector))
+                throw new IllegalArgumentException("Issue was found - group selector is active for edit addressBook entity");
+        }
+
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(addressBookSubmitBtn));
+        addressBookSubmitBtn.click();
+
+    }
+
 }

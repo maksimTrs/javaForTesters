@@ -10,6 +10,8 @@ services:
   chrome:
     image: selenium/node-chrome:4.7.2-20221219
     shm_size: 2gb
+    volumes:
+      - E:\MAX\IT\Logging\testimages:/opt/selenium/testimages
     depends_on:
       - hub
     environment:

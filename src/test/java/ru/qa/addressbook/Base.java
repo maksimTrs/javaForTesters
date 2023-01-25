@@ -23,7 +23,7 @@ public abstract class Base {
 //        driver = WebDriverManager.chromedriver().create();
 //        driver.manage().window().maximize();
 
-        //String host = "192.168.0.191"; //   IPv4-адрес 192.168.0.191   localhost
+        // String host = "192.168.0.191"; //   IPv4-адрес 192.168.0.191   localhost
         String host = System.getProperty("HUB_HOST");
         String browserType = "CHROME"; // FIREFOX  CHROME
 

@@ -21,6 +21,15 @@ public class AddressBookData {
     private String month;
     private int year;
 
+    private String filePath;
+
+
+    public AddressBookData withFilePath(String filePath) {
+        this.filePath = filePath;
+        return this;
+    }
+
+
     public AddressBookData withFirstName(String firstName) {
         this.firstName = firstName;
         return this;

@@ -14,24 +14,24 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 import static utils.NumberGenerator.generateNumber;
 
-public class AddressBookEntryTest extends Base {
-
-    private static Logger strLogger = Logger.getLogger(AddressBookEntryTest.class);
+public class AddressBookEntryPhotoTest extends Base {
+    private static Logger strLogger = Logger.getLogger(AddressBookEntryPhotoTest.class);
     private static List<String> initialAddressBookData;
     private String lastName;
     private AddressBookEntryPage addressBookEntryPage;
 
 
     @BeforeMethod
-    public AddressBookEntryPage createAddBookEntity() {
+    public AddressBookEntryPage createAddBookEntityWithPhoto() {
         int randomYearGenerator = ((int) (Math.random() * 25 + 1979)) + ((int) (Math.random() * 7 + 3));
         String firstName = "firstName_1_" + randomYearGenerator;
         lastName = "lastName_" + generateNumber() + "_" + randomYearGenerator;
+
+        String filePath = "/opt/selenium/testimages/Test_Image2.png";
+
         String bookCompany = "bookCompany_1_" + randomYearGenerator;
         String bookMobile = "+79031" + generateNumber() + randomYearGenerator;
         String bookEmail = "bookEmail_1_" + randomYearGenerator + "@test.com";
-        String bDay = "25";
-        String bMonth = "May";
         boolean checkNewBookData = true;
 
 
@@ -41,15 +41,19 @@ public class AddressBookEntryTest extends Base {
 
         addressBookEntryPage = new AddressBookEntryPage(driver);
 
+//        addressBookEntryPage.createNewAddressBook(new AddressBookData(firstName, lastName, bookCompany, bookMobile,
+//                bookEmail, bDay, bMonth, randomYearGenerator, true));
 
-        addressBookEntryPage.createNewAddressBook(new AddressBookData().withFirstName(firstName).withLastName(lastName)
-                .withBookCompany(bookCompany).withBookMobile(bookMobile).withBookEmail(bookEmail).withDay(bDay)
-                .withMonth(bMonth).withYear(randomYearGenerator).withCheckNewBookData(checkNewBookData));
+        addressBookEntryPage.createNewAddressBookWithPhoto(new AddressBookData().withFirstName(firstName).withLastName(lastName)
+                .withFilePath(filePath)
+                .withBookCompany(bookCompany).withBookMobile(bookMobile)
+                .withBookEmail(bookEmail).withCheckNewBookData(checkNewBookData));
 
         return addressBookEntryPage;
     }
 
-    @Test(groups = "smoke", testName = "test_create_new_Address_Book_record")
+
+    @Test(groups = "smoke", testName = "test_create_new_Address_Book_entity_with_Photo")
     public void testBookAddRecord() {
 
 
@@ -63,23 +67,18 @@ public class AddressBookEntryTest extends Base {
 
         System.out.println(listOfAddressGroups);
 
-
         Assert.assertEquals(listOfAddressGroups, initialAddressBookData);
 
-        List<String> tableHeader = addressBookEntryPage.getHeaderTable().stream()
-                .map(WebElement::getText)
-                .collect(Collectors.toList());
-        System.out.println(tableHeader);
+        boolean photoPresents = addressBookEntryPage.gotToTheAddressBookDetailPage(lastName).checkAccountImage();
 
-
-        String[] expectedHeaderValues = {"Last name", "First name", "Address", "All e-mail", "All phones"};
-        assertThat(tableHeader).as("check header column names").containsExactly(expectedHeaderValues);
+        assertThat(photoPresents).as("test entity does not have the image!").isTrue();
 
 
         strLogger.info("********************************************************************************");
-        strLogger.info("<<< Test method: " + AddressBookEntryTest.class.getMethods()[0].toString() + " passed >>>");
+        strLogger.info("<<< Test method: " + AddressBookEntryPhotoTest.class.getMethods()[0].toString() + " passed >>>");
         strLogger.info("********************************************************************************");
 
 
     }
 }
+
