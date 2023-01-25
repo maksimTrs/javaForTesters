@@ -200,6 +200,7 @@ public class AddressBookEntryPage {
         addressBookMobile.sendKeys(addressBookData.getBookMobile());
         addressBookEmail.sendKeys(addressBookData.getBookEmail());
 
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(photoFileUploaderBtn));
         photoFileUploaderBtn.sendKeys(addressBookData.getFilePath());
 
         if (addressBookData.isCheckNewBookData()) {
