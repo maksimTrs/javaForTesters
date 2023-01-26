@@ -5,11 +5,11 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.log4testng.Logger;
+import utils.TestDataProvider;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static utils.NumberGenerator.generateNumber;
 
 
 public class BookCreateGroupTest extends Base {
@@ -17,13 +17,9 @@ public class BookCreateGroupTest extends Base {
     private static Logger strLogger = Logger.getLogger(BookCreateGroupTest.class);
 
 
-    @Test(groups = "smoke", testName = "test_create_addressBook_group")
-    public void testBookAddGroup() {
 
-        int randomGroupNumberGenerator = (int) (Math.random() * 100 + 3);
-        String groupName = "GroupName_" + generateNumber() + "_" + randomGroupNumberGenerator;
-        String groupHeader = "GroupHeader_1_" + randomGroupNumberGenerator;
-        String groupFooter = "GroupFooter_1_" + randomGroupNumberGenerator;
+    @Test(dataProvider = "group-data-provider", dataProviderClass = TestDataProvider.class, groups = "smoke", testName = "test_create_addressBook_group")
+    public void testBookAddGroup(String groupName, String groupHeader, String groupFooter) {
 
         GroupsPage groupsPage = new GroupsPage(driver);
         groupsPage.createNewGroup(new GroupData(groupName, groupHeader, groupFooter));

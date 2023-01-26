@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.log4testng.Logger;
+import utils.TestDataProvider;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,22 +19,14 @@ public class AddressBookEntryTest extends Base {
 
     private static Logger strLogger = Logger.getLogger(AddressBookEntryTest.class);
     private static List<String> initialAddressBookData;
-    private String lastName;
+   // private String lastName;
     private AddressBookEntryPage addressBookEntryPage;
 
 
-    @BeforeMethod
-    public AddressBookEntryPage createAddBookEntity() {
-        int randomYearGenerator = ((int) (Math.random() * 25 + 1979)) + ((int) (Math.random() * 7 + 3));
-        String firstName = "firstName_1_" + randomYearGenerator;
-        lastName = "lastName_" + generateNumber() + "_" + randomYearGenerator;
-        String bookCompany = "bookCompany_1_" + randomYearGenerator;
-        String bookMobile = "+79031" + generateNumber() + randomYearGenerator;
-        String bookEmail = "bookEmail_1_" + randomYearGenerator + "@test.com";
-        String bDay = "25";
-        String bMonth = "May";
-        boolean checkNewBookData = true;
 
+    @Test(dataProvider = "addressBook-data-provider", dataProviderClass = TestDataProvider.class, groups = "smoke", testName = "test_create_new_Address_Book_record")
+    public void testBookAddRecord(int randomYearGenerator, String firstName, String lastName, String bookCompany, String bookMobile,
+                                  String bookEmail, String bDay, String bMonth, boolean checkNewBookData) {
 
         initialAddressBookData = Arrays.asList(lastName, firstName, bookEmail, bookMobile);
         System.out.println(initialAddressBookData);
@@ -45,12 +38,6 @@ public class AddressBookEntryTest extends Base {
         addressBookEntryPage.createNewAddressBook(new AddressBookData().withFirstName(firstName).withLastName(lastName)
                 .withBookCompany(bookCompany).withBookMobile(bookMobile).withBookEmail(bookEmail).withDay(bDay)
                 .withMonth(bMonth).withYear(randomYearGenerator).withCheckNewBookData(checkNewBookData));
-
-        return addressBookEntryPage;
-    }
-
-    @Test(groups = "smoke", testName = "test_create_new_Address_Book_record")
-    public void testBookAddRecord() {
 
 
         addressBookEntryPage.goToAddressBookPage();

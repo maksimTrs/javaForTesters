@@ -8,6 +8,7 @@ import utils.LogInHelper;
 
 import java.net.MalformedURLException;
 
+import static utils.LocalDriverManager.BrowserType.LOCAL;
 import static utils.LocalDriverManager.BrowserType.SELENIUM_GRID;
 
 
@@ -20,10 +21,8 @@ public abstract class Base {
     @BeforeClass
     public void setUp() throws MalformedURLException {
 
-//        driver = WebDriverManager.chromedriver().create();
-//        driver.manage().window().maximize();
 
-        // String host = "192.168.0.191"; //   IPv4-адрес 192.168.0.191   localhost
+        //String host = "192.168.0.191"; //   IPv4-адрес 192.168.0.191   localhost
         String host = System.getProperty("HUB_HOST");
         String browserType = "CHROME"; // FIREFOX  CHROME
 
