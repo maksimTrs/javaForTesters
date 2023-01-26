@@ -23,7 +23,7 @@ public class AddressBookEntryPhotoTest extends Base {
 
     @BeforeMethod
     public AddressBookEntryPage createAddBookEntityWithPhoto() {
-        int randomYearGenerator = ((int) (Math.random() * 25 + 1979)) + ((int) (Math.random() * 7 + 3));
+        int randomYearGenerator = ((int) (Math.random() * 25 + 1979)) + ((int) (Math.random() * 7 + 6));
         String firstName = "firstName_1_" + randomYearGenerator;
         lastName = "lastName_" + generateNumber() + "_" + randomYearGenerator;
 
