@@ -19,6 +19,17 @@ public class TestDataProvider {
         return new String(init);
     }
 
+    private static int getIntRandomValue() {
+        Random rand = new Random();
+        int upperbound = 999;
+        return rand.nextInt(upperbound);
+    }
+
+    private static int getIntRandomValueForMobile(int a, int b) {
+        return  ((int) (Math.random() * a + b));
+    }
+
+
     private static String firstDomainLvl = getRandomFirstDomainLvl();
 
     private static int randomGroupNumberGenerator = (int) (Math.random() * 100 + 3);
@@ -29,7 +40,8 @@ public class TestDataProvider {
 
     private static int randomYearGenerator = ((int) (Math.random() * 25 + 1979)) + ((int) (Math.random() * 7 + 3));
     private static String firstName = "firstName_1_" + randomYearGenerator;
-    private static String lastName = "lastName_" + generateNumber() + "_" + randomYearGenerator;
+    private static String lastName = "lastName_1_" + (generateNumber() + getIntRandomValue() + 3) + "_" + randomYearGenerator;
+    private static String lastName2 = "lastName_2_" + (generateNumber() + getIntRandomValue() - 3) + "_" + randomYearGenerator;
     private static String bookCompany = "bookCompany_1_" + randomYearGenerator;
     private static String bookMobile = "+7903" + generateNumber() + randomYearGenerator;
     private static String bookEmail = "bookEmail_1_" + randomYearGenerator + "@test." + firstDomainLvl;
@@ -46,9 +58,9 @@ public class TestDataProvider {
     @DataProvider(name = "group-data-provider")
     public static Object[][] dataProviderForGroup() {
         return new Object[][]{
-                {groupName + ((int) (Math.random() * 7 + 3)), groupHeader, groupFooter},
-                {groupName + ((int) (Math.random() * 7 + 4)), groupHeader, groupFooter},
-                {groupName + ((int) (Math.random() * 7 + 5)), groupHeader, groupFooter}
+                {groupName +  getIntRandomValueForMobile(7, 2), groupHeader, groupFooter},
+                {groupName +  getIntRandomValueForMobile(117, 4), groupHeader, groupFooter},
+                {groupName +  getIntRandomValueForMobile(1117, 8), groupHeader, groupFooter}
         };
     }
 
@@ -56,22 +68,22 @@ public class TestDataProvider {
     @DataProvider(name = "addressBook-data-provider")
     public static Object[][] dataProviderForAddressBook() {
         return new Object[][]{
-                {randomYearGenerator, firstName, lastName + ((int) (Math.random() * 7 + 3)), bookCompany,
-                        bookMobile + ((int) (Math.random() * 7 + 2)), bookEmail, bDay, bMonth, checkNewBookData},
-                {randomYearGenerator, firstName, lastName + ((int) (Math.random() * 8 + 4)), bookCompany,
-                        bookMobile + ((int) (Math.random() * 7 + 3)), bookEmail, bDay, bMonth, checkNewBookData},
-                {randomYearGenerator, firstName, lastName + ((int) (Math.random() * 9 + 5)), bookCompany,
-                        bookMobile + ((int) (Math.random() * 7 + 4)), bookEmail, bDay, bMonth, checkNewBookData}
+                {randomYearGenerator, firstName, lastName + getIntRandomValue(), bookCompany,
+                        bookMobile + getIntRandomValueForMobile(7, 2), bookEmail, bDay, bMonth, checkNewBookData},
+                {randomYearGenerator, firstName, lastName + getIntRandomValue(), bookCompany,
+                        bookMobile + getIntRandomValueForMobile(7, 3), bookEmail, bDay, bMonth, checkNewBookData},
+                {randomYearGenerator, firstName, lastName + getIntRandomValue(), bookCompany,
+                        bookMobile + getIntRandomValueForMobile(7, 4), bookEmail, bDay, bMonth, checkNewBookData}
         };
     }
 
     @DataProvider(name = "addressBook-data-provider-with-photo")
     public static Object[][] dataProviderForAddressBookWithPhoto() {
         return new Object[][]{
-                {firstName, lastName + ((int) (Math.random() * 7 + 6)), filePath, bookCompany,
-                        bookMobile + ((int) (Math.random() * 7 + 2)), bookEmail, checkNewBookData},
-                {firstName, lastName + ((int) (Math.random() * 8 + 7)), filePath2, bookCompany,
-                        bookMobile + ((int) (Math.random() * 7 + 3)), bookEmail, checkNewBookData}
+                {firstName, lastName2 + getIntRandomValue(), filePath, bookCompany,
+                        bookMobile + getIntRandomValueForMobile(6, 3), bookEmail, checkNewBookData},
+                {firstName, lastName2 + getIntRandomValue(), filePath2, bookCompany,
+                        bookMobile + getIntRandomValueForMobile(5, 4), bookEmail, checkNewBookData}
         };
     }
 }
