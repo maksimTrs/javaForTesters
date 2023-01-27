@@ -9,11 +9,11 @@ import static utils.NumberGenerator.generateNumber;
 
 public class TestDataProvider {
 
-    private  static String getRandomFirstDomainLvl() {
+    private static String getRandomFirstDomainLvl() {
         StringBuilder init = new StringBuilder();
         Random r = new Random();
         for (int i = 0; i < 3; i++) {
-            char c = (char)(r.nextInt(26) + 'a');
+            char c = (char) (r.nextInt(26) + 'a');
             init.append(c);
         }
         return new String(init);
@@ -37,6 +37,11 @@ public class TestDataProvider {
     private static String bMonth = "December";
     private static boolean checkNewBookData = true;
 
+    private static String filePath = "/opt/selenium/testimages/Test_Image2.png";
+    // private  static String filePath = "E:\\MAX\\IT\\Logging\\testimages\\Test_Image2.png";
+    //private  static String filePath2 = "E:\\MAX\\IT\\Logging\\testimages\\Test_Image1.jpg";
+    private static String filePath2 = "/opt/selenium/testimages/Test_Image1.jpg";
+
 
     @DataProvider(name = "group-data-provider")
     public static Object[][] dataProviderForGroup() {
@@ -57,6 +62,16 @@ public class TestDataProvider {
                         bookMobile + ((int) (Math.random() * 7 + 3)), bookEmail, bDay, bMonth, checkNewBookData},
                 {randomYearGenerator, firstName, lastName + ((int) (Math.random() * 7 + 5)), bookCompany,
                         bookMobile + ((int) (Math.random() * 7 + 4)), bookEmail, bDay, bMonth, checkNewBookData}
+        };
+    }
+
+    @DataProvider(name = "addressBook-data-provider-with-photo")
+    public static Object[][] dataProviderForAddressBookWithPhoto() {
+        return new Object[][]{
+                {firstName, lastName + ((int) (Math.random() * 7 + 6)), filePath, bookCompany,
+                        bookMobile + ((int) (Math.random() * 7 + 2)), bookEmail, checkNewBookData},
+                {firstName, lastName + ((int) (Math.random() * 7 + 7)), filePath2, bookCompany,
+                        bookMobile + ((int) (Math.random() * 7 + 3)), bookEmail, checkNewBookData}
         };
     }
 }

@@ -32,7 +32,7 @@ services:
       - SE_NODE_MAX_INSTANCES=4
       - SE_NODE_MAX_SESSIONS=4
   java_project_test:
-    image: roronoazorroippo/java-for-testers-1:1.0
+    image: roronoazorroippo/java-for-testers-1
     #build: .
     extra_hosts:
       - "host.docker.internal:host-gateway"
