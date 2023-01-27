@@ -4,31 +4,10 @@ import org.testng.annotations.DataProvider;
 
 import java.util.Random;
 
-import static utils.NumberGenerator.generateNumber;
+import static utils.NumberGenerator.*;
 
 
 public class TestDataProvider {
-
-    private static String getRandomFirstDomainLvl() {
-        StringBuilder init = new StringBuilder();
-        Random r = new Random();
-        for (int i = 0; i < 3; i++) {
-            char c = (char) (r.nextInt(26) + 'a');
-            init.append(c);
-        }
-        return new String(init);
-    }
-
-    private static int getIntRandomValue() {
-        Random rand = new Random();
-        int upperbound = 999;
-        return rand.nextInt(upperbound);
-    }
-
-    private static int getIntRandomValueForMobile(int a, int b) {
-        return  ((int) (Math.random() * a + b));
-    }
-
 
     private static String firstDomainLvl = getRandomFirstDomainLvl();
 
