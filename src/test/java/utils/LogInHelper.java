@@ -11,7 +11,7 @@ public class LogInHelper {
     private static final String PASS_BASE64 = "c2VjcmV0";
     private static final String USER_NAME = "admin";
 
-    //private static final String URL = "http://192.168.0.191/addressbook/";
+    // private static final String URL = "http://192.168.0.191/addressbook/";
 
     private static String host = System.getProperty("HUB_HOST");
     private static String port = "41062";

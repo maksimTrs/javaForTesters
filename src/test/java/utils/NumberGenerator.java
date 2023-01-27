@@ -26,6 +26,6 @@ public class NumberGenerator {
     }
 
     public static int getIntRandomValueForMobile(int a, int b) {
-        return  ((int) (Math.random() * a + b));
+        return ((int) (Math.random() * a + b));
     }
 }

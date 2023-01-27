@@ -2,8 +2,6 @@ package utils;
 
 import org.testng.annotations.DataProvider;
 
-import java.util.Random;
-
 import static utils.NumberGenerator.*;
 
 
@@ -37,9 +35,9 @@ public class TestDataProvider {
     @DataProvider(name = "group-data-provider")
     public static Object[][] dataProviderForGroup() {
         return new Object[][]{
-                {groupName +  getIntRandomValueForMobile(7, 2), groupHeader, groupFooter},
-                {groupName +  getIntRandomValueForMobile(117, 4), groupHeader, groupFooter},
-                {groupName +  getIntRandomValueForMobile(1117, 8), groupHeader, groupFooter}
+                {groupName + getIntRandomValueForMobile(7, 2), groupHeader, groupFooter},
+                {groupName + getIntRandomValueForMobile(117, 4), groupHeader, groupFooter},
+                {groupName + getIntRandomValueForMobile(1117, 8), groupHeader, groupFooter}
         };
     }
 

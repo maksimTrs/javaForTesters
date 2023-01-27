@@ -3,9 +3,7 @@ package ru.qa.addressbook;
 import classdata.AddressBookData;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.testng.log4testng.Logger;
 import utils.TestDataProvider;
 
 import java.util.Arrays;
@@ -13,14 +11,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static utils.NumberGenerator.generateNumber;
 
 public class AddressBookEntryPhotoTest extends Base {
-    private static Logger strLogger = Logger.getLogger(AddressBookEntryPhotoTest.class);
+
     private static List<String> initialAddressBookData;
-
     private AddressBookEntryPage addressBookEntryPage;
-
 
 
     @Test(dataProvider = "addressBook-data-provider-with-photo", dataProviderClass = TestDataProvider.class,
@@ -56,12 +51,6 @@ public class AddressBookEntryPhotoTest extends Base {
         boolean photoPresents = addressBookEntryPage.gotToTheAddressBookDetailPage(lastName).checkAccountImage();
 
         assertThat(photoPresents).as("test entity does not have the image!").isTrue();
-
-
-        strLogger.info("********************************************************************************");
-        strLogger.info("<<< Test method: " + AddressBookEntryPhotoTest.class.getMethods()[0].toString() + " passed >>>");
-        strLogger.info("********************************************************************************");
-
 
     }
 }

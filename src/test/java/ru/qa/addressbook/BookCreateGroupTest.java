@@ -4,21 +4,17 @@ import classdata.GroupData;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.testng.log4testng.Logger;
 import utils.TestDataProvider;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 
-
 public class BookCreateGroupTest extends Base {
 
-    private static Logger strLogger = Logger.getLogger(BookCreateGroupTest.class);
 
-
-
-    @Test(dataProvider = "group-data-provider", dataProviderClass = TestDataProvider.class, groups = "smoke", testName = "test_create_addressBook_group")
+    @Test(dataProvider = "group-data-provider", dataProviderClass = TestDataProvider.class,
+            groups = "smoke", testName = "test_create_addressBook_group")
     public void testBookAddGroup(String groupName, String groupHeader, String groupFooter) {
 
         GroupsPage groupsPage = new GroupsPage(driver);
@@ -37,12 +33,6 @@ public class BookCreateGroupTest extends Base {
                 .findFirst().orElse(null);
 
         Assert.assertEquals(testGroupName, groupName);
-
-
-        strLogger.info("********************************************************************************");
-        strLogger.info("<<< Test method: " + BookCreateGroupTest.class.getMethods()[0].toString() + " passed >>>");
-        strLogger.info("********************************************************************************");
-
 
     }
 
