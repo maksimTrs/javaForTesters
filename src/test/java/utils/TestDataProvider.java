@@ -58,9 +58,9 @@ public class TestDataProvider {
         return new Object[][]{
                 {randomYearGenerator, firstName, lastName + ((int) (Math.random() * 7 + 3)), bookCompany,
                         bookMobile + ((int) (Math.random() * 7 + 2)), bookEmail, bDay, bMonth, checkNewBookData},
-                {randomYearGenerator, firstName, lastName + ((int) (Math.random() * 7 + 4)), bookCompany,
+                {randomYearGenerator, firstName, lastName + ((int) (Math.random() * 8 + 4)), bookCompany,
                         bookMobile + ((int) (Math.random() * 7 + 3)), bookEmail, bDay, bMonth, checkNewBookData},
-                {randomYearGenerator, firstName, lastName + ((int) (Math.random() * 7 + 5)), bookCompany,
+                {randomYearGenerator, firstName, lastName + ((int) (Math.random() * 9 + 5)), bookCompany,
                         bookMobile + ((int) (Math.random() * 7 + 4)), bookEmail, bDay, bMonth, checkNewBookData}
         };
     }
@@ -70,7 +70,7 @@ public class TestDataProvider {
         return new Object[][]{
                 {firstName, lastName + ((int) (Math.random() * 7 + 6)), filePath, bookCompany,
                         bookMobile + ((int) (Math.random() * 7 + 2)), bookEmail, checkNewBookData},
-                {firstName, lastName + ((int) (Math.random() * 7 + 7)), filePath2, bookCompany,
+                {firstName, lastName + ((int) (Math.random() * 8 + 7)), filePath2, bookCompany,
                         bookMobile + ((int) (Math.random() * 7 + 3)), bookEmail, checkNewBookData}
         };
     }
