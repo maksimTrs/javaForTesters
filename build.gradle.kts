@@ -46,6 +46,10 @@ tasks.getByName<Test>("test") {
         // System.setProperty("BROWSER", "FIREFOX");
         systemProperty("BROWSER", "FIREFOX");
     }
+
+    // OR we can use this option: # !!!!!!!!!!!!
+    // systemProperty('HUB_HOST', "${hub_host}")
+    // and send command: ./gradlew clean test -Phub_host="host.docker.internal" -Psuite1
     if (project.hasProperty("hub_host")) {
         // System.setProperty("BROWSER", "FIREFOX");
         systemProperty("HUB_HOST", "host.docker.internal")

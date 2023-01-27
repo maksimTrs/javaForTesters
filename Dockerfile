@@ -33,8 +33,15 @@ RUN gradle assemble
 #CMD  gradle test  $   -Psuite1 -Psuite2
 #RUN cd /app/src
 
-#ENTRYPOINT gradle test -DBROWSER=$BROWSER -DHUB_HOST=$HUB_HOST   $MODULE
 ENTRYPOINT gradle clean test $HUB_HOST $BROWSER $MODULE  allureReport
+
+#ENTRYPOINT gradle clean test -Phub_host=$HUB_HOST  -Pbrowser=$BROWSER  allureReport  # !!!!!!!!!!
+#docker run -e HUB_HOST="host.docker.internal" ...  # !!!!!!!!!!!
+# systemProperty('HUB_HOST', "${hub_host}")
+# systemProperty('BROWSER', "${browser}")
+# and send command: ./gradlew clean test -Phub_host="host.docker.internal" -Pbrowser=firefox -Psuite1
+
+
 #  gradle allureReport
 #-DBROWSER=$BROWSER -DHUB_HOST=$HUB_HOST   $MODULE
 #$MODULE
