@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AddressBookEntryPhotoTest extends Base {
+public class AddressBookEntryPhotoTest extends BaseTest {
 
     private static List<String> initialAddressBookData;
     private AddressBookEntryPage addressBookEntryPage;

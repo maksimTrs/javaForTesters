@@ -3,7 +3,7 @@ package ru.qa.addressbook;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class BookDeletionTest extends Base {
+public class BookDeletionTest extends BaseTest {
 
     @Test(groups = "smoke", testName = "test_delete_addressBook_group")
     public void testDeleteGroup() {

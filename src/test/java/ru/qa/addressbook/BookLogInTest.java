@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class BookLogInTest extends Base {
+public class BookLogInTest extends BaseTest {
 
 
     @Test(groups = "smoke", testName = "test_login")

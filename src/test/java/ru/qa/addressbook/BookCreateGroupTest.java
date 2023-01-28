@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class BookCreateGroupTest extends Base {
+public class BookCreateGroupTest extends BaseTest {
 
 
     @Test(dataProvider = "group-data-provider", dataProviderClass = TestDataProvider.class,

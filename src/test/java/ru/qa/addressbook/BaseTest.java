@@ -16,9 +16,9 @@ import java.util.List;
 import static utils.LocalDriverManager.BrowserType.SELENIUM_GRID;
 
 
-public abstract class Base {
+public abstract class BaseTest {
 
-    public Logger strLogger = Logger.getLogger(Base.class);
+    protected Logger logger = Logger.getLogger(BaseTest.class);
     protected WebDriver driver;
     private LogInHelper logInHelper;
 
@@ -42,7 +42,7 @@ public abstract class Base {
             browserType = "FIREFOX";
         }
         driver = localDriverManager.createInstance(browserType, SELENIUM_GRID, host);  // SELENIUM_GRID or LOCAL
-        System.out.println("+++++ AT Test was started for browser = " + browserType + " +++++");
+        logger.info("+++++ AT Test was started for browser = " + browserType + " +++++");
 
         logInHelper = new LogInHelper();
         logInHelper.doSignIn(driver);
@@ -56,17 +56,17 @@ public abstract class Base {
 
     @BeforeMethod
     public void logTestStart(Method method, Object[] parameters) {
-        strLogger.info("********************************************************************************");
-        strLogger.info("<<< Test method: " + method.getName() + " with parameters " + List.of(parameters) + " was started >>>");
-        strLogger.info("********************************************************************************");
+        logger.info("********************************************************************************");
+        logger.info("<<< Test method: " + method.getName() + " with parameters " + List.of(parameters) + " was started >>>");
+        logger.info("********************************************************************************");
 
     }
 
     @AfterMethod(alwaysRun = true)
     public void logTestStop(Method method) {
-        strLogger.info("********************************************************************************");
-        strLogger.info("<<< Test method: " + method.getName() + " was finished >>>");
-        strLogger.info("********************************************************************************");
+        logger.info("********************************************************************************");
+        logger.info("<<< Test method: " + method.getName() + " was finished >>>");
+        logger.info("********************************************************************************");
 
     }
 
