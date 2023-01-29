@@ -5,9 +5,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.log4testng.Logger;
 import utils.LocalDriverManager;
 import utils.LogInHelper;
+import org.apache.log4j.Logger;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -18,7 +18,8 @@ import static utils.LocalDriverManager.BrowserType.SELENIUM_GRID;
 
 public abstract class BaseTest {
 
-    protected Logger logger = Logger.getLogger(BaseTest.class);
+   // protected Logger logger = Logger.getLogger(BaseTest.class);
+    protected static  Logger logger = Logger.getLogger(BaseTest.class);
     protected WebDriver driver;
     private LogInHelper logInHelper;
 
