@@ -1,5 +1,8 @@
 package ru.qa.addressbook;
 
+import io.qameta.allure.Attachment;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -65,10 +68,19 @@ public abstract class BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void logTestStop(Method method) {
+        saveScreenshotPNG();
+
         logger.info("********************************************************************************");
         logger.info("<<< Test method: " + method.getName() + " was finished >>>");
         logger.info("********************************************************************************");
 
+    }
+
+
+    @Attachment(value = "Page Screenshot", type = "image/png")
+    public byte[] saveScreenshotPNG() {
+        logger.info("Attaching screenshot to Allure report");
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 
 
