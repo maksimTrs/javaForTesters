@@ -41,10 +41,14 @@ public class BookDBTest extends BaseTest {
         assertThat(listOfAddressGroups).isNotEmpty().isNotNull();
 
 
+        List<String> listOfAddressesDBGroupNameFiled = new ArrayList<>();
+        List<Integer> listOfAddressesDBGroupIDFiled = new ArrayList<>();
+
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
         try {
+            // localhost <-> "host.docker.internal"
             conn = DriverManager.getConnection("jdbc:mysql://localhost/addressbook?" +
                     "user=root&password=");
 
@@ -54,6 +58,17 @@ public class BookDBTest extends BaseTest {
             rs = stmt.executeQuery(String.format("SELECT group_id, group_name FROM group_list WHERE group_name='%s'",
                     groupName));
 
+            while (rs.next()) {
+                String str = rs.getString("group_name");
+                int id = rs.getInt("group_id");
+
+                listOfAddressesDBGroupNameFiled.add(str);
+                listOfAddressesDBGroupIDFiled.add(id);
+
+                System.out.println("!!!!!!!!!!!   " + listOfAddressesDBGroupNameFiled);
+                System.out.println("!!!!!!!!!!!   " + listOfAddressesDBGroupIDFiled);
+            }
+
 
         } catch (SQLException ex) {
             // handle any errors
@@ -61,20 +76,39 @@ public class BookDBTest extends BaseTest {
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
         }
+        finally {
+            // it is a good idea to release
+            // resources in a finally{} block
+            // in reverse-order of their creation
+            // if they are no-longer needed
 
-        List<String> listOfAddressesDBGroupNameFiled = new ArrayList<>();
-        List<Integer> listOfAddressesDBGroupIDFiled = new ArrayList<>();
-        while (rs.next()) {
-            String str = rs.getString("group_name");
-            int id = rs.getInt("group_id");
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ignored) {
+                } // ignore
 
-            listOfAddressesDBGroupNameFiled.add(str);
-            listOfAddressesDBGroupIDFiled.add(id);
+                rs = null;
+            }
 
-            System.out.println("!!!!!!!!!!!   " + listOfAddressesDBGroupNameFiled);
-            System.out.println("!!!!!!!!!!!   " + listOfAddressesDBGroupIDFiled);
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ignored) {
+                } // ignore
+
+                stmt = null;
+            }
+
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ignored) {
+                } // ignore
+
+                conn = null;
+            }
         }
-
 
         assertThat(listOfAddressGroups).isEqualTo(listOfAddressesDBGroupNameFiled);
         assertThat(listOfAddressesDBGroupIDFiled).isNotEmpty().isNotNull();
