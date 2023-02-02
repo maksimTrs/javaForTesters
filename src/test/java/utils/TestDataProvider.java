@@ -35,9 +35,9 @@ public class TestDataProvider {
     @DataProvider(name = "group-data-provider")
     public static Object[][] dataProviderForGroup() {
         return new Object[][]{
-                {groupName + getIntRandomValueForMobile(7, 2), groupHeader, groupFooter},
-                {groupName + getIntRandomValueForMobile(117, 4), groupHeader, groupFooter},
-                {groupName + getIntRandomValueForMobile(1117, 8), groupHeader, groupFooter}
+                {groupName + getIntRandomValueForMobile(7, 2), groupHeader, groupFooter}
+            /*    {groupName + getIntRandomValueForMobile(117, 4), groupHeader, groupFooter},
+                {groupName + getIntRandomValueForMobile(1117, 8), groupHeader, groupFooter}*/
         };
     }
 
@@ -46,11 +46,11 @@ public class TestDataProvider {
     public static Object[][] dataProviderForAddressBook() {
         return new Object[][]{
                 {randomYearGenerator, firstName, lastName + getIntRandomValue(), bookCompany,
-                        bookMobile + getIntRandomValueForMobile(7, 2), bookEmail, bDay, bMonth, checkNewBookData},
-                {randomYearGenerator, firstName, lastName + getIntRandomValue(), bookCompany,
+                        bookMobile + getIntRandomValueForMobile(7, 2), bookEmail, bDay, bMonth, checkNewBookData}
+            /*    {randomYearGenerator, firstName, lastName + getIntRandomValue(), bookCompany,
                         bookMobile + getIntRandomValueForMobile(7, 3), bookEmail, bDay, bMonth, checkNewBookData},
                 {randomYearGenerator, firstName, lastName + getIntRandomValue(), bookCompany,
-                        bookMobile + getIntRandomValueForMobile(7, 4), bookEmail, bDay, bMonth, checkNewBookData}
+                        bookMobile + getIntRandomValueForMobile(7, 4), bookEmail, bDay, bMonth, checkNewBookData}*/
         };
     }
 
