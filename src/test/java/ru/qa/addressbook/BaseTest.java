@@ -55,8 +55,9 @@ public abstract class BaseTest {
 
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void tearDown() {
+        logInHelper = null;
         driver.quit();
     }
 
