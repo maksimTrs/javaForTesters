@@ -15,13 +15,13 @@ import utils.LogInHelper;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static utils.LocalDriverManager.BrowserType.SELENIUM_GRID;
 
 
 public abstract class BaseTest {
 
-    // protected Logger logger = Logger.getLogger(BaseTest.class);
     protected static Logger logger = Logger.getLogger(BaseTest.class);
     protected WebDriver driver;
     protected LogInHelper logInHelper;
@@ -46,6 +46,8 @@ public abstract class BaseTest {
             browserType = "FIREFOX";
         }
         driver = localDriverManager.createInstance(browserType, SELENIUM_GRID, host);  // SELENIUM_GRID or LOCAL
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
         logger.info("+++++ AT Test was started for browser = " + browserType + " +++++");
 
         logInHelper = new LogInHelper();
@@ -53,9 +55,8 @@ public abstract class BaseTest {
 
     }
 
-    @AfterClass(alwaysRun = true)
+    @AfterClass
     public void tearDown() {
-        logInHelper = null;
         driver.quit();
     }
 
@@ -91,4 +92,3 @@ public abstract class BaseTest {
 // ./gradlew test --tests "ru.qa*"
 // ./gradlew test -Psuite1
 //  ./gradlew test  -Psuite1 -Psuite2
-// ./gradlew allureServe

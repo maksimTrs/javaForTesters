@@ -8,7 +8,7 @@
             <class name="ru.qa.addressbook.BookCreateGroupTest"/>
             <class name="ru.qa.addressbook.AddressBookEntryTest"/>
             <class name="ru.qa.addressbook.AddressBookEntryPhotoTest"/>
-            <class name="ru.qa.addressbook.BookDBTest"/>
+            <class name="ru.qa.addressbook.BookGroupInDBTest"/>
         </classes>
     </test>
 </suite>

@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="entity-deletion-tests" parallel="classes" thread-count="4">
+<suite name="entity-deletion-tests" parallel="classes" thread-count="2">
     <!--    <parameter name="browserType" value="CHROME"/>-->
     <test name="book-deletion-tests">
         <!--        <parameter name="keyword" value="java"/>-->

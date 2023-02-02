@@ -32,8 +32,8 @@ services:
       - SE_NODE_MAX_INSTANCES=4
       - SE_NODE_MAX_SESSIONS=4
   java_project_test:
-    image: roronoazorroippo/java-for-testers-1
-    #build: .
+    #image: roronoazorroippo/java-for-testers-1
+    build: .
     extra_hosts:
       - "host.docker.internal:host-gateway"
     container_name: java-for-testers-tests-1
@@ -57,6 +57,7 @@ services:
     ports:
       - "41061:22"
       - "41062:80"
+      - "3306:3306"
   chrome_video:
     image: selenium/video:ffmpeg-4.3.1-20221219
     volumes:
