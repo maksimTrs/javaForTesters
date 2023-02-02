@@ -16,6 +16,7 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.util.List;
 
+import static utils.LocalDriverManager.BrowserType.LOCAL;
 import static utils.LocalDriverManager.BrowserType.SELENIUM_GRID;
 
 
@@ -24,14 +25,14 @@ public abstract class BaseTest {
    // protected Logger logger = Logger.getLogger(BaseTest.class);
     protected static  Logger logger = Logger.getLogger(BaseTest.class);
     protected WebDriver driver;
-    private LogInHelper logInHelper;
+    protected LogInHelper logInHelper;
 
     @BeforeClass
     public void setUp() throws MalformedURLException {
 
 
-        //String host = "192.168.0.191"; //   IPv4-адрес 192.168.0.191   localhost
-        String host = System.getProperty("HUB_HOST");
+        String host = "192.168.0.191"; //   IPv4-адрес 192.168.0.191   localhost
+//        String host = System.getProperty("HUB_HOST");
         String browserType = "CHROME"; // FIREFOX  CHROME
 
 
@@ -45,7 +46,7 @@ public abstract class BaseTest {
                 System.getProperty("BROWSER").equalsIgnoreCase("FIREFOX")) {
             browserType = "FIREFOX";
         }
-        driver = localDriverManager.createInstance(browserType, SELENIUM_GRID, host);  // SELENIUM_GRID or LOCAL
+        driver = localDriverManager.createInstance(browserType, LOCAL, host);  // SELENIUM_GRID or LOCAL
         logger.info("+++++ AT Test was started for browser = " + browserType + " +++++");
 
         logInHelper = new LogInHelper();
