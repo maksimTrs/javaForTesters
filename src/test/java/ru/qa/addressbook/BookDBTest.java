@@ -15,16 +15,29 @@ import static utils.NumberGenerator.getIntRandomValue;
 
 public class BookDBTest extends BaseTest {
 
+    //  localhost <> host.docker.internal
+    // private static final String DB_CONNECT_URL = "jdbc:mysql://localhost/addressbook?user=root&password=";
+
+    private static String host = System.getProperty("HUB_HOST");
+    private static final String DB_CONNECT_URL = "jdbc:mysql://" + host + "/addressbook?user=root&password=";
+
     @DataProvider(name = "group-data-db-provider")
     private Object[][] dataProviderForGroup() {
         return new Object[][]{
-                {"Test_Group_7_777_" + getIntRandomValue(), "Test_Group_Header_7_777", "Test_Group_Footer_7_777"}
+                {"Test_Group_7_777_" + getIntRandomValue(), "Test_Group_Header_7_777" + getIntRandomValue(),
+                        "Test_Group_Footer_7_777" + getIntRandomValue()}
 
         };
     }
 
+    private PreparedStatement createPreparedStatement(Connection con, String groupName) throws SQLException {
+        String sql = "SELECT group_id, group_name FROM group_list WHERE group_name='%s'";
+        //ps.setInt(1, userId);
+        return con.prepareStatement(String.format(sql, groupName));
+    }
+
     @Test(dataProvider = "group-data-db-provider", groups = "smoke", testName = "test_create_addressBook_group_in_DB")
-    public void testBookAddGroupAndValidateDB(String groupName, String groupHeader, String groupFooter) throws SQLException {
+    public void testBookAddGroupAndValidateDB(String groupName, String groupHeader, String groupFooter) {
 
         GroupsPage groupsPage = new GroupsPage(driver);
         groupsPage.createNewGroup(new GroupData(groupName, groupHeader, groupFooter));
@@ -36,7 +49,7 @@ public class BookDBTest extends BaseTest {
                 .filter(s -> s.equals(groupName))
                 .collect(Collectors.toList());
 
-        System.out.println("!!!!!!!!!!!   " + listOfAddressGroups);
+        logger.info("UI GroupName = " + listOfAddressGroups);
 
         assertThat(listOfAddressGroups).isNotEmpty().isNotNull();
 
@@ -44,19 +57,10 @@ public class BookDBTest extends BaseTest {
         List<String> listOfAddressesDBGroupNameFiled = new ArrayList<>();
         List<Integer> listOfAddressesDBGroupIDFiled = new ArrayList<>();
 
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-        try {
-            // localhost <-> "host.docker.internal"
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/addressbook?" +
-                    "user=root&password=");
 
-
-            // Do something with the Connection
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(String.format("SELECT group_id, group_name FROM group_list WHERE group_name='%s'",
-                    groupName));
+        try (Connection con = DriverManager.getConnection(DB_CONNECT_URL);
+             PreparedStatement ps = createPreparedStatement(con, groupName);
+             ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 String str = rs.getString("group_name");
@@ -65,53 +69,18 @@ public class BookDBTest extends BaseTest {
                 listOfAddressesDBGroupNameFiled.add(str);
                 listOfAddressesDBGroupIDFiled.add(id);
 
-                System.out.println("!!!!!!!!!!!   " + listOfAddressesDBGroupNameFiled);
-                System.out.println("!!!!!!!!!!!   " + listOfAddressesDBGroupIDFiled);
+                logger.info("DB GroupName = " + listOfAddressesDBGroupNameFiled);
+                logger.info("DB GroupName ID = " + listOfAddressesDBGroupIDFiled);
             }
-
-
-        } catch (SQLException ex) {
-            // handle any errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        finally {
-            // it is a good idea to release
-            // resources in a finally{} block
-            // in reverse-order of their creation
-            // if they are no-longer needed
 
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException ignored) {
-                } // ignore
-
-                rs = null;
-            }
-
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException ignored) {
-                } // ignore
-
-                stmt = null;
-            }
-
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException ignored) {
-                } // ignore
-
-                conn = null;
-            }
-        }
 
         assertThat(listOfAddressGroups).isEqualTo(listOfAddressesDBGroupNameFiled);
         assertThat(listOfAddressesDBGroupIDFiled).isNotEmpty().isNotNull();
     }
-
 }
+
+
+
