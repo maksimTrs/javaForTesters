@@ -19,11 +19,9 @@ public class BookGroupInDBTest extends BaseTest {
     //  localhost  <> 192.168.0.191
     // private static final String DB_CONNECT_URL = "jdbc:mysql://localhost/addressbook?user=root&password=";
 
-    // private static String host = System.getProperty("HUB_HOST");
-    //private static final String DB_CONNECT_URL = "jdbc:mysql://" + host + ":3306/addressbook?user=test&password=test";
-
-    private static final String DB_CONNECT_URL = "jdbc:mysql://localhost:3306/addressbook?user=test&password=test" +
-            "&autoReconnect=true&useSSL=false";
+    private static String host = System.getProperty("HUB_HOST");
+    private static final String DB_CONNECT_URL = "jdbc:mysql://" + host + ":3306/addressbook?user=test&password=test";
+    //  "&autoReconnect=true&useSSL=false";
 
 
     private PreparedStatement createPreparedStatement(Connection con, String groupName) throws SQLException {

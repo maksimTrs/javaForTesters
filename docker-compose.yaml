@@ -20,20 +20,20 @@ services:
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
       - SE_NODE_MAX_INSTANCES=4
       - SE_NODE_MAX_SESSIONS=4
-  firefox:
-    image: selenium/node-firefox:4.7.2-20221219
-    shm_size: 2gb
-    depends_on:
-      - hub
-    environment:
-      - SE_EVENT_BUS_HOST=hub
-      - SE_EVENT_BUS_PUBLISH_PORT=4442
-      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-      - SE_NODE_MAX_INSTANCES=4
-      - SE_NODE_MAX_SESSIONS=4
+  #  firefox:
+  #    image: selenium/node-firefox:4.7.2-20221219
+  #    shm_size: 2gb
+  #    depends_on:
+  #      - hub
+  #    environment:
+  #      - SE_EVENT_BUS_HOST=hub
+  #      - SE_EVENT_BUS_PUBLISH_PORT=4442
+  #      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+  #      - SE_NODE_MAX_INSTANCES=4
+  #      - SE_NODE_MAX_SESSIONS=4
   java_project_test:
-    #image: roronoazorroippo/java-for-testers-1
-    build: .
+    image: roronoazorroippo/java-for-testers-1
+    #build: .
     extra_hosts:
       - "host.docker.internal:host-gateway"
     container_name: java-for-testers-tests-1
@@ -47,13 +47,14 @@ services:
       - E:\MAX\IT\Logging\java_for_testers\allure-results:/app/allure-results
     environment:
       - HUB_HOST=-Phub_host
-      - BROWSER=-Pchrome
+      - BROWSER=-Pchrome   #-Pfirefox
       - MODULE=-Psuite1 -Psuite2
   xampp_with_book_app:
-    image: roronoazorroippo/xampp-with-addressbook-app:5
+    image: roronoazorroippo/xampp-with-addressbook-app:5.1
     container_name: xampp-with-addressbook-1
     volumes:
       - E:\MAX\IT\xampp\htdocs\addressbook:/www
+      - data-xampp-volume:/var/lib/backup/data
     ports:
       - "41061:22"
       - "41062:80"
@@ -67,15 +68,18 @@ services:
     environment:
       - DISPLAY_CONTAINER_NAME=chrome
       - FILE_NAME=chrome_video.mp4
-  firefox_video:
-    image: selenium/video:ffmpeg-4.3.1-20221219
-    volumes:
-      - E:\MAX\IT\Logging\java_for_testers\firefox:/videos
-    depends_on:
-      - firefox
-    environment:
-      - DISPLAY_CONTAINER_NAME=firefox
-      - FILE_NAME=firefox_video.mp4
+#  firefox_video:
+#    image: selenium/video:ffmpeg-4.3.1-20221219
+#    volumes:
+#      - E:\MAX\IT\Logging\java_for_testers\firefox:/videos
+#    depends_on:
+#      - firefox
+#    environment:
+#      - DISPLAY_CONTAINER_NAME=firefox
+#      - FILE_NAME=firefox_video.mp4
+volumes:
+  data-xampp-volume:
+  #external: true
 
 
 
