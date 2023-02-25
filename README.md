@@ -23,3 +23,11 @@ Separate image parts of the app:
 - docker push roronoazorroippo/java-for-testers-1:latest
 
 https://hub.docker.com/r/tomsik68/xampp/
+
+
+To prepare jar main and test data use:
+1) ./gradlew clean
+2) ./gradlew assemble
+3) E:\MAX\IT\1Coding\IntelliJ_IDEA_Projects\javaForTesters\build\libs> java -cp "javaForTesters-1.0-SNAPSHOT.jar;javaForTesters-test-1.0-SNAPSHOT.jar;lib/*" org.testng.TestNG ..\resour
+ces\test\testngCreationTests.xml
+

@@ -38,6 +38,35 @@ dependencies {
 }
 
 
+tasks.register("copyAllDependencies", Copy::class) {
+
+    from(configurations.runtimeClasspath.files)
+    into("$buildDir/libs/lib")
+
+}
+
+tasks.jar {
+
+    from(sourceSets["main"].output)
+    archiveFileName.set("javaForTesters-1.0-SNAPSHOT.jar")
+    destinationDirectory.set(file("$buildDir/libs"))
+}
+
+
+tasks.register<Jar>("packageTests") {
+    from(sourceSets.test.get().output)
+    archiveFileName.set("javaForTesters-test-1.0-SNAPSHOT.jar")
+    destinationDirectory.set(file("$buildDir/libs"))
+}
+
+
+tasks {
+    "jar" {
+        dependsOn("copyAllDependencies")
+        dependsOn("packageTests")
+    }
+}
+
 
 tasks.getByName<Test>("test") {
     ignoreFailures = true
